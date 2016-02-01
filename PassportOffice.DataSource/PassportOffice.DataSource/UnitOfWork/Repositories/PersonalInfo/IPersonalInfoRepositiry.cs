@@ -8,7 +8,7 @@
     /// <summary>
     /// Frame for implementing repository of personal data.
     /// </summary>
-    interface IPersonalInfoRepositiry : IDisposable
+    public interface IPersonalInfoRepositiry : IDisposable
     {
         /// <summary>
         /// Finds all data in source of data.
