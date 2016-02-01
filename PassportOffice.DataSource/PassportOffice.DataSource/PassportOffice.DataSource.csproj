@@ -57,6 +57,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\PersonInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitOfWork\Repositories\PersonalInfo\IPersonalInfoRepositiry.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
