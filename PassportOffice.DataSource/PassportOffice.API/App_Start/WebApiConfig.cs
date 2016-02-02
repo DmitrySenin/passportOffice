@@ -9,6 +9,9 @@
         {
             // Web API configuration and services
 
+            // Enable crossdamain requests.
+            config.EnableCors();
+
             // Web API routes
             config.MapHttpAttributeRoutes();
 

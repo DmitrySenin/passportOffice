@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Web.Http;
+    using System.Web.Http.Cors;
 
     using PassportOffice.DataSource.Model;
     using PassportOffice.DataSource.UnitOfWork;
@@ -9,6 +10,7 @@
     /// <summary>
     /// Controller which contains API to access personal information.
     /// </summary>
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("personalinfo")]
     public class PersonalInfoController : ApiController
     {
