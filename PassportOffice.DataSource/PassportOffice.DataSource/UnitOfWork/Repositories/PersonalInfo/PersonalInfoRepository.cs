@@ -37,7 +37,15 @@
         /// <returns>All records from database.</returns>
         public IEnumerable<PersonInfo> GetAll()
         {
-            return this.passportOfficeContext.Persons.ToList();
+            List<PersonInfo> personalData = this.passportOfficeContext.Persons
+                                                                        .OrderBy(p => p.LastName)
+                                                                        .ThenBy(p => p.FirstName)
+                                                                        .ThenBy(p => p.MiddleName)
+                                                                        .ThenBy(p => p.BirthdayDate)
+                                                                        .ThenBy(p => p.PassportSeries)
+                                                                        .ThenBy(p => p.PassportNumber)
+                                                                        .ToList();
+            return personalData;
         }
 
         /// <summary>
