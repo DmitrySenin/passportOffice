@@ -49,7 +49,9 @@
         /// <returns>All records from database which satisfy restrictions.</returns>
         public IEnumerable<PersonInfo> SearchAll(PersonalInfoSearchingOptions searchOptions)
         {
-            throw new NotImplementedException();
+            IQueryable<PersonInfo> dbPersonalInfo = this.GetAllFromDB();
+            dbPersonalInfo = this.SortRecords(this.SearchRecords(dbPersonalInfo, searchOptions));
+            return dbPersonalInfo.ToList();
         }
 
         /// <summary>
@@ -120,6 +122,53 @@
                                 .ThenBy(p => p.BirthdayDate)
                                 .ThenBy(p => p.PassportSeries)
                                 .ThenBy(p => p.PassportNumber);
+        }
+
+        /// <summary>
+        /// Searches personal data using criteria.
+        /// </summary>
+        /// <param name="personalInfo">Collection of personal data.</param>
+        /// <param name="searchingOptions">Searching criteria.</param>
+        /// <returns>Selected records of personal data.</returns>
+        private IQueryable<PersonInfo> SearchRecords(IQueryable<PersonInfo> personalInfo, PersonalInfoSearchingOptions searchingOptions)
+        {
+            // Add searching by first name if need
+            if (searchingOptions.UseFirstName())
+            {
+                personalInfo = personalInfo.Where(p => p.FirstName.StartsWith(searchingOptions.FirstName));
+            }
+
+            // Add searching by last name if need
+            if (searchingOptions.UseLastName())
+            {
+                personalInfo = personalInfo.Where(p => p.LastName.StartsWith(searchingOptions.LastName));
+            }
+
+            // Add searching by middle name if need
+            if (searchingOptions.UseMiddleName())
+            {
+                personalInfo = personalInfo.Where(p => p.MiddleName.StartsWith(searchingOptions.MiddleName));
+            }
+
+            // Add searching by series of passport if need
+            if (searchingOptions.UsePassportSeries())
+            {
+                personalInfo = personalInfo.Where(p => p.PassportSeries.StartsWith(searchingOptions.PassportSeries));
+            }
+
+            // Add searching by number of passport if need
+            if (searchingOptions.UsePassportNumber())
+            {
+                personalInfo = personalInfo.Where(p => p.PassportNumber.StartsWith(searchingOptions.PassportNumber));
+            }
+
+            // Add searching by date of birthday if need
+            if (searchingOptions.UseBirthdayDate())
+            {
+                personalInfo = personalInfo.Where(p => p.BirthdayDate == searchingOptions.BirthdayDate);
+            }
+
+            return personalInfo;
         }
     }
 }
