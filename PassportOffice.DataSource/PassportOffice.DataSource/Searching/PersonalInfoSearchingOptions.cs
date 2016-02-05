@@ -35,7 +35,7 @@
         /// <summary>
         /// Restriction of person's date of birth.
         /// </summary>
-        public DateTime BirthdayDate { get; set; }
+        public DateTime? BirthdayDate { get; set; }
 
         /// <summary>
         /// Checks that first name should be used for searching.
