@@ -6,6 +6,7 @@
 
     using PassportOffice.DataSource.Context;
     using PassportOffice.DataSource.Model;
+    using Searching;
 
     /// <summary>
     /// Repository with personal data based on database context.
@@ -46,6 +47,16 @@
                                                                         .ThenBy(p => p.PassportNumber)
                                                                         .ToList();
             return personalData;
+        }
+
+        /// <summary>
+        /// Searches all data considering criteria.
+        /// </summary>
+        /// <param name="searchOptions">Searching criteria.</param>
+        /// <returns>All records from database which satisfy restrictions.</returns>
+        public IEnumerable<PersonInfo> SearchAll(PersonalInfoSearchingOptions searchOptions)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
