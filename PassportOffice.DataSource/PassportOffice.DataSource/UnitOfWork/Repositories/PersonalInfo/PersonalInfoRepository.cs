@@ -38,14 +38,7 @@
         /// <returns>All records from database.</returns>
         public IEnumerable<PersonInfo> GetAll()
         {
-            List<PersonInfo> personalData = this.passportOfficeContext.Persons
-                                                                        .OrderBy(p => p.LastName)
-                                                                        .ThenBy(p => p.FirstName)
-                                                                        .ThenBy(p => p.MiddleName)
-                                                                        .ThenBy(p => p.BirthdayDate)
-                                                                        .ThenBy(p => p.PassportSeries)
-                                                                        .ThenBy(p => p.PassportNumber)
-                                                                        .ToList();
+            List<PersonInfo> personalData = this.SortRecords(this.GetAllFromDB()).ToList();
             return personalData;
         }
 
@@ -101,6 +94,32 @@
 
                 this.disposed = true;
             }
+        }
+
+        /// <summary>
+        /// Load data from database.
+        /// </summary>
+        /// <returns>All personal information from database.</returns>
+        private IQueryable<PersonInfo> GetAllFromDB()
+        {
+            return this.passportOfficeContext.Persons.AsQueryable<PersonInfo>();
+        }
+
+        /// <summary>
+        /// Sort personal information.
+        /// It sorts data firstly by last name, then by first name,
+        /// middle name, date of birth, series of passport, number of passport.
+        /// </summary>
+        /// <param name="personalInfo">Data that should be sorted.</param>
+        /// <returns>Sorted collection of personal data.</returns>
+        private IQueryable<PersonInfo> SortRecords(IQueryable<PersonInfo> personalInfo)
+        {
+            return personalInfo.OrderBy(p => p.LastName)
+                                .ThenBy(p => p.FirstName)
+                                .ThenBy(p => p.MiddleName)
+                                .ThenBy(p => p.BirthdayDate)
+                                .ThenBy(p => p.PassportSeries)
+                                .ThenBy(p => p.PassportNumber);
         }
     }
 }
