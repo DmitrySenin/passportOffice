@@ -4,8 +4,9 @@
     using System.Web.Http;
     using System.Web.Http.Cors;
 
+    using PassportOffice.API.DataAccess;
+
     using PassportOffice.DataSource.Model;
-    using PassportOffice.DataSource.UnitOfWork;
 
     /// <summary>
     /// Controller which contains API to access personal information.
@@ -15,9 +16,9 @@
     public class PersonalInfoController : ApiController
     {
         /// <summary>
-        /// Collection of repositories contain information from database.
+        /// Manager which used to access data source.
         /// </summary>
-        private UnitOfWork databaseRepos = new UnitOfWork();
+        PersonalInfoManager personalInfoManager = new PersonalInfoManager();
 
         /// <summary>
         /// Finds all data at data storage.
@@ -27,7 +28,7 @@
         [HttpGet]
         public IEnumerable<PersonInfo> GetAll()
         {
-            return databaseRepos.PersonalInfoRepository.GetAll();
+            return personalInfoManager.GetAll();
         }
     }
 }
