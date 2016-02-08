@@ -4,7 +4,10 @@
 	<title>Passport Office</title>
 	<meta charset='utf-8'>
 
+	<link rel="stylesheet" type="text/css" href="app/lib/css/bootstrap.min.css">
+
 	<script src="app/lib/angular.min.js"></script>
+	<script type="text/javascript" src="app/lib/ui-bootstrap-tpls-1.1.2.min.js"></script>
 
 	<script type="text/javascript" src="app/PersonalData/PersonalDataFactory.js"></script>
 	<script type="text/javascript" src="app/PersonalData/PersonalInfoCtrl.js"></script>
@@ -32,11 +35,11 @@
 						<td><input type="text"></td>
 						<td><input type="text"></td>
 						<td><input type="text"></td>
+						<td>
+							<input type="text" ng-model="tmp_date" uib-datepicker-popup="yyyy-MM-dd" is-open="dateprickerPopup.opened" close-text="Close" ng-click="openDatepickerPopup()"/>
+						</td>
 						<td><input type="text"></td>
 						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td></td>
-						<td></td>
 					</tr>
 				</tbody>
 				<tbody>

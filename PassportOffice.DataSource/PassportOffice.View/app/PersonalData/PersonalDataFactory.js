@@ -1,4 +1,4 @@
-;angular.module('main', []).factory("PersonalInfoLoader", ['$http', function ($http) {
+;angular.module('main', ['ui.bootstrap']).factory("PersonalInfoLoader", ['$http', function ($http) {
 	
 	/**
 	 * URL of server.

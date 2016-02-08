@@ -16,4 +16,14 @@
 				$scope.error = error;
 			});
 	}
+
+	// Represents datepicker's state.
+	$scope.dateprickerPopup = {
+		opened: false
+	};
+
+	// Open datepicker.
+	$scope.openDatepickerPopup = function() {
+		$scope.dateprickerPopup.opened = true;
+	};
 }]);
