@@ -32,14 +32,16 @@
 				</thead>
 				<tbody id="personalInfoSearchOptions">
 					<tr>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
+						<td><input type="text" ng-model="SearchingOptions.LastName" ng-change="getInfo()"></td>
+						<td><input type="text" ng-model="SearchingOptions.FirstName" ng-change="getInfo()"></td>
+						<td><input type="text" ng-model="SearchingOptions.MiddleName" ng-change="getInfo()"></td>
 						<td>
-							<input type="text" ng-model="tmp_date" uib-datepicker-popup="yyyy-MM-dd" is-open="dateprickerPopup.opened" close-text="Close" ng-click="openDatepickerPopup()"/>
+							<input type="text" ng-model="SearchingOptions.BirthdayDate" uib-datepicker-popup="yyyy-MM-dd" is-open="dateprickerPopup.opened" close-text="Close" ng-click="openDatepickerPopup()" ng-change="getInfo()"/>
 						</td>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
+						<td><input type="text" ng-model="SearchingOptions.PassportSeries" ng-change="getInfo()"></td>
+						<td><input type="text" ng-model="SearchingOptions.PassportNumber" ng-change="getInfo()"></td>
+						<td></td>
+						<td></td>
 					</tr>
 				</tbody>
 				<tbody>

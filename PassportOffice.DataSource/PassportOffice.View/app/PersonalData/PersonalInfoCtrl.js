@@ -1,10 +1,10 @@
 ;angular.module('main').controller("PersonalInfoCtrl", ['$scope', 'PersonalInfoLoader',
 	function($scope, PersonalInfoLoader) {
 
-	getInfo();
+	$scope.SearchingOptions = new PersonalInfoLoader.SearchingOptions();
 
-	function getInfo() {
-		PersonalInfoLoader.Load()
+	$scope.getInfo = function() {
+		PersonalInfoLoader.Load($scope.SearchingOptions)
 			.success(function(data) {
 				$scope.PersonalInfo = data;
 				$scope.PersonalInfo.map(function(item, index, arr) {
@@ -16,6 +16,8 @@
 				$scope.error = error;
 			});
 	}
+
+	$scope.getInfo();
 
 	// Represents datepicker's state.
 	$scope.dateprickerPopup = {
