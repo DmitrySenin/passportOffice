@@ -165,7 +165,9 @@
             // Add searching by date of birthday if need
             if (searchingOptions.UseBirthdayDate())
             {
-                personalInfo = personalInfo.Where(p => p.BirthdayDate == searchingOptions.BirthdayDate);
+                personalInfo = personalInfo.Where(p => p.BirthdayDate.Year == searchingOptions.BirthdayDate.Value.Year
+                                                        && p.BirthdayDate.Month == searchingOptions.BirthdayDate.Value.Month
+                                                        && p.BirthdayDate.Day == searchingOptions.BirthdayDate.Value.Day);
             }
 
             return personalInfo;
