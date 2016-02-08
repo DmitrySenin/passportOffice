@@ -7,6 +7,7 @@
     using PassportOffice.API.DataAccess;
 
     using PassportOffice.DataSource.Model;
+    using PassportOffice.DataSource.Searching;
 
     /// <summary>
     /// Controller which contains API to access personal information.
@@ -26,9 +27,9 @@
         /// <returns>All records of personal information from data source.</returns>
         [Route("")]
         [HttpGet]
-        public IEnumerable<PersonInfo> GetAll()
+        public IEnumerable<PersonInfo> GetAll([FromUri] PersonalInfoSearchingOptions searchOptions)
         {
-            return personalInfoManager.GetAll();
+            return personalInfoManager.SearchAll(searchOptions);
         }
     }
 }
