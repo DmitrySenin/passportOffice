@@ -25,11 +25,11 @@
         /// Finds all data at data storage.
         /// </summary>
         /// <returns>All records of personal information from data source.</returns>
-        [Route("")]
+        [Route("{pageSize:int}/{pageNumber:int}")]
         [HttpGet]
-        public IEnumerable<PersonInfo> GetAll([FromUri] PersonalInfoSearchingOptions searchOptions)
+        public IEnumerable<PersonInfo> GetAll(int pageSize, int pageNumber, [FromUri] PersonalInfoSearchingOptions searchOptions)
         {
-            return personalInfoManager.SearchAll(searchOptions);
+            return personalInfoManager.GetPagedList(pageSize, pageNumber, searchOptions);
         }
     }
 }
