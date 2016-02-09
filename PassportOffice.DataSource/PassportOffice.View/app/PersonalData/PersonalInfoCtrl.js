@@ -1,31 +1,48 @@
-;angular.module('main').controller("PersonalInfoCtrl", ['$scope', 'PersonalInfoLoader',
-	function($scope, PersonalInfoLoader) {
+;(function() {
+	'use strict';
 
-	$scope.SearchingOptions = new PersonalInfoLoader.SearchingOptions();
+	angular
+		.module('main')
+		.controller("PersonalInfoCtrl", PersonalInfoCtrl);
 
-	$scope.getInfo = function() {
-		PersonalInfoLoader.Load($scope.SearchingOptions)
-			.success(function(data) {
-				$scope.PersonalInfo = data;
-				$scope.PersonalInfo.map(function(item, index, arr) {
-					arr[index].BirthdayDate = new Date(item.BirthdayDate);
-					arr[index].PassportIssueDate = new Date(item.PassportIssueDate);
+	PersonalInfoCtrl.$inject = ['PersonalInfoLoader'];
+
+	function PersonalInfoCtrl(PersonalInfoLoader) {
+
+		var vm = this,
+			currentPage = 1,
+			pageSize = 20;
+
+		vm.SearchingOptions = new PersonalInfoLoader.SearchingOptions();
+
+		/**
+		 * Load personal data and set value of context variables.
+		 */
+		vm.getInfo = function() {
+			PersonalInfoLoader.Load(pageSize, currentPage, vm.SearchingOptions)
+				.success(function(data) {
+					vm.PersonalInfo = data;
+					vm.PersonalInfo.map(function(item, index, arr) {
+						arr[index].BirthdayDate = new Date(item.BirthdayDate);
+						arr[index].PassportIssueDate = new Date(item.PassportIssueDate);
+					});
+				})
+				.error(function(error) {
+					vm.error = error;
 				});
-			})
-			.error(function(error) {
-				$scope.error = error;
-			});
+		}
+
+		// Load personal data.
+		vm.getInfo();
+
+		// Represents datepicker's state.
+		vm.dateprickerPopup = {
+			opened: false
+		};
+
+		// Open datepicker.
+		vm.openDatepickerPopup = function() {
+			vm.dateprickerPopup.opened = true;
+		};
 	}
-
-	$scope.getInfo();
-
-	// Represents datepicker's state.
-	$scope.dateprickerPopup = {
-		opened: false
-	};
-
-	// Open datepicker.
-	$scope.openDatepickerPopup = function() {
-		$scope.dateprickerPopup.opened = true;
-	};
-}]);
+})();

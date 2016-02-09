@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div ng-app="main">
-		<div ng-controller="PersonalInfoCtrl">
+		<div ng-controller="PersonalInfoCtrl as personalInfo">
 			<table id="personalInfoContainer">
 				<thead>
 					<tr>
@@ -34,20 +34,20 @@
 				</thead>
 				<tbody id="personalInfoSearchOptions">
 					<tr>
-						<td><input type="text" ng-model="SearchingOptions.LastName" ng-change="getInfo()"></td>
-						<td><input type="text" ng-model="SearchingOptions.FirstName" ng-change="getInfo()"></td>
-						<td><input type="text" ng-model="SearchingOptions.MiddleName" ng-change="getInfo()"></td>
+						<td><input type="text" ng-model="personalInfo.SearchingOptions.LastName" ng-change="personalInfo.getInfo()"></td>
+						<td><input type="text" ng-model="personalInfo.SearchingOptions.FirstName" ng-change="personalInfo.getInfo()"></td>
+						<td><input type="text" ng-model="personalInfo.SearchingOptions.MiddleName" ng-change="personalInfo.getInfo()"></td>
 						<td>
-							<input type="text" ng-model="SearchingOptions.BirthdayDate" uib-datepicker-popup="yyyy-MM-dd" is-open="dateprickerPopup.opened" close-text="Close" ng-click="openDatepickerPopup()" ng-change="getInfo()"/>
+							<input type="text" ng-model="personalInfo.SearchingOptions.BirthdayDate" uib-datepicker-popup="yyyy-MM-dd" is-open="personalInfo.dateprickerPopup.opened" close-text="Close" ng-click="personalInfo.openDatepickerPopup()" ng-change="personalInfo.getInfo()"/>
 						</td>
-						<td><input type="text" ng-model="SearchingOptions.PassportSeries" ng-change="getInfo()"></td>
-						<td><input type="text" ng-model="SearchingOptions.PassportNumber" ng-change="getInfo()"></td>
+						<td><input type="text" ng-model="personalInfo.SearchingOptions.PassportSeries" ng-change="personalInfo.getInfo()"></td>
+						<td><input type="text" ng-model="personalInfo.SearchingOptions.PassportNumber" ng-change="personalInfo.getInfo()"></td>
 						<td></td>
 						<td></td>
 					</tr>
 				</tbody>
 				<tbody>
-					<tr ng-repeat="personalinfo in PersonalInfo">
+					<tr ng-repeat="personalinfo in personalInfo.PersonalInfo">
 						<td>{{personalinfo.LastName}}</td>
 						<td>{{personalinfo.FirstName}}</td>
 						<td>{{personalinfo.MiddleName}}</td>
