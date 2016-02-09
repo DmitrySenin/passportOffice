@@ -55,6 +55,18 @@
         }
 
         /// <summary>
+        /// Finds personal data which satisfy criteria and located on page with passed number.
+        /// </summary>
+        /// <param name="pageSize">Size of page of information.</param>
+        /// <param name="pageNumber">Number of page.</param>
+        /// <param name="searchOptions">Criteria for selecting data.</param>
+        /// <returns>All records located on requested page.</returns>
+        public IEnumerable<PersonInfo> GetPage(int pageSize, int pageNumber, PersonalInfoSearchingOptions searchOptions)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Finds record with concete unique identifier.
         /// </summary>
         /// <param name="id">Unique identifier of record at database.</param>
