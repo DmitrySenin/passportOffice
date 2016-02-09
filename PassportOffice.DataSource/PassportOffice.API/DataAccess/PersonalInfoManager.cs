@@ -42,5 +42,17 @@
         {
             return this.reposCollection.PersonalInfoRepository.SearchAll(searchingOptions);
         }
+
+        /// <summary>
+        /// Finds all selected records on requested page.
+        /// </summary>
+        /// <param name="pageSize">Count of records on one page.</param>
+        /// <param name="pageNumber">Number of requested page.</param>
+        /// <param name="searchingOptions">Criteria for selection of records.</param>
+        /// <returns>Records located on requested page.</returns>
+        public IEnumerable<PersonInfo> GetPagedList(int pageSize, int pageNumber, PersonalInfoSearchingOptions searchingOptions)
+        {
+            return this.reposCollection.PersonalInfoRepository.GetPage(pageSize, pageNumber, searchingOptions);
+        }
     }
 }
