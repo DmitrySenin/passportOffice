@@ -132,44 +132,46 @@
         /// <returns>Selected records of personal data.</returns>
         private IQueryable<PersonInfo> SearchRecords(IQueryable<PersonInfo> personalInfo, PersonalInfoSearchingOptions searchingOptions)
         {
-            // Add searching by first name if need
-            if (searchingOptions.UseFirstName())
+            if (PersonalInfoSearchingOptions.CheckSearchingOptions(searchingOptions))
             {
-                personalInfo = personalInfo.Where(p => p.FirstName.StartsWith(searchingOptions.FirstName));
-            }
+                // Add searching by first name if need
+                if (searchingOptions.UseFirstName())
+                {
+                    personalInfo = personalInfo.Where(p => p.FirstName.StartsWith(searchingOptions.FirstName));
+                }
 
-            // Add searching by last name if need
-            if (searchingOptions.UseLastName())
-            {
-                personalInfo = personalInfo.Where(p => p.LastName.StartsWith(searchingOptions.LastName));
-            }
+                // Add searching by last name if need
+                if (searchingOptions.UseLastName())
+                {
+                    personalInfo = personalInfo.Where(p => p.LastName.StartsWith(searchingOptions.LastName));
+                }
 
-            // Add searching by middle name if need
-            if (searchingOptions.UseMiddleName())
-            {
-                personalInfo = personalInfo.Where(p => p.MiddleName.StartsWith(searchingOptions.MiddleName));
-            }
+                // Add searching by middle name if need
+                if (searchingOptions.UseMiddleName())
+                {
+                    personalInfo = personalInfo.Where(p => p.MiddleName.StartsWith(searchingOptions.MiddleName));
+                }
 
-            // Add searching by series of passport if need
-            if (searchingOptions.UsePassportSeries())
-            {
-                personalInfo = personalInfo.Where(p => p.PassportSeries.StartsWith(searchingOptions.PassportSeries));
-            }
+                // Add searching by series of passport if need
+                if (searchingOptions.UsePassportSeries())
+                {
+                    personalInfo = personalInfo.Where(p => p.PassportSeries.StartsWith(searchingOptions.PassportSeries));
+                }
 
-            // Add searching by number of passport if need
-            if (searchingOptions.UsePassportNumber())
-            {
-                personalInfo = personalInfo.Where(p => p.PassportNumber.StartsWith(searchingOptions.PassportNumber));
-            }
+                // Add searching by number of passport if need
+                if (searchingOptions.UsePassportNumber())
+                {
+                    personalInfo = personalInfo.Where(p => p.PassportNumber.StartsWith(searchingOptions.PassportNumber));
+                }
 
-            // Add searching by date of birthday if need
-            if (searchingOptions.UseBirthdayDate())
-            {
-                personalInfo = personalInfo.Where(p => p.BirthdayDate.Year == searchingOptions.BirthdayDate.Value.Year
-                                                        && p.BirthdayDate.Month == searchingOptions.BirthdayDate.Value.Month
-                                                        && p.BirthdayDate.Day == searchingOptions.BirthdayDate.Value.Day);
+                // Add searching by date of birthday if need
+                if (searchingOptions.UseBirthdayDate())
+                {
+                    personalInfo = personalInfo.Where(p => p.BirthdayDate.Year == searchingOptions.BirthdayDate.Value.Year
+                                                            && p.BirthdayDate.Month == searchingOptions.BirthdayDate.Value.Month
+                                                            && p.BirthdayDate.Day == searchingOptions.BirthdayDate.Value.Day);
+                }
             }
-
             return personalInfo;
         }
     }

@@ -90,5 +90,22 @@
         {
             return this.BirthdayDate != null;
         }
+
+        /// <summary>
+        /// Check the correctness of passed searching options.
+        /// </summary>
+        /// <param name="searchingOptions">Searching options to be checked.</param>
+        /// <returns>Flag which identifies correctness of searching options.</returns>
+        public static bool CheckSearchingOptions(PersonalInfoSearchingOptions searchingOptions)
+        {
+            bool checkResult = true;
+
+            if (searchingOptions == null)
+            {
+                checkResult = false;
+            }
+
+            return checkResult;
+        }
     }
 }
