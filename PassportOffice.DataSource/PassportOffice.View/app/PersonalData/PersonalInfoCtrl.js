@@ -11,8 +11,10 @@
 
 		var vm = this,
 			currentPage = 1,
-			pageSize = 20;
+			pageSize = 10,
+			allDataLoaded = false;
 
+		vm.PersonalInfo = [];
 		vm.SearchingOptions = new PersonalInfoLoader.SearchingOptions();
 
 		/**
@@ -21,14 +23,24 @@
 		vm.getInfo = function() {
 			PersonalInfoLoader.Load(pageSize, currentPage, vm.SearchingOptions)
 				.success(function(data) {
-					vm.PersonalInfo = data;
-					vm.PersonalInfo.map(function(item, index, arr) {
+					data.map(function(item, index, arr) {
 						arr[index].BirthdayDate = new Date(item.BirthdayDate);
 						arr[index].PassportIssueDate = new Date(item.PassportIssueDate);
+						vm.PersonalInfo.push(arr[index]);
 					});
+
+					// If loaded portion of data less than requested
+					if(data.length < pageSize) {
+						allDataLoaded = true;
+					}
+
+
+					vm.InfiniteScroll.inLoading = false;
 				})
 				.error(function(error) {
 					vm.error = error;
+
+					vm.InfiniteScroll.inLoading = false;
 				});
 		}
 
@@ -43,6 +55,18 @@
 		// Open datepicker.
 		vm.openDatepickerPopup = function() {
 			vm.dateprickerPopup.opened = true;
+		};
+
+		// Inifinite scroll.
+		vm.InfiniteScroll = {
+			inLoading: false,
+			nextPage: function() {
+				if(!allDataLoaded) {
+					this.inLoading = true;
+					currentPage++;
+					vm.getInfo();
+				}
+			}
 		};
 	}
 })();

@@ -1,4 +1,4 @@
 ;(function () {
 	angular
-		.module('main', ['ui.bootstrap']);
+		.module('main', ['ui.bootstrap', 'infinite-scroll']);
 })();

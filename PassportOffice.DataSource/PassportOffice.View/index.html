@@ -48,7 +48,7 @@
 						<td></td>
 					</tr>
 				</tbody>
-				<tbody>
+				<tbody infinite-scroll="personalInfo.InfiniteScroll.nextPage()" infinite-scroll-disabled='personalInfo.InfiniteScroll.inLoading'>
 					<tr ng-repeat="personalinfo in personalInfo.PersonalInfo">
 						<td>{{personalinfo.LastName}}</td>
 						<td>{{personalinfo.FirstName}}</td>
