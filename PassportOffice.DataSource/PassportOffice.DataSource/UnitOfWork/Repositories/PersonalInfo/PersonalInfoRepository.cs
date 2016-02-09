@@ -63,7 +63,10 @@
         /// <returns>All records located on requested page.</returns>
         public IEnumerable<PersonInfo> GetPage(int pageSize, int pageNumber, PersonalInfoSearchingOptions searchOptions)
         {
-            throw new NotImplementedException();
+            IQueryable<PersonInfo> dbPersonalInfo = this.GetAllFromDB();
+            dbPersonalInfo = this.SortRecords(this.SearchRecords(dbPersonalInfo, searchOptions));
+            dbPersonalInfo = this.GetPagedRecords(dbPersonalInfo, pageSize, pageNumber);
+            return dbPersonalInfo.ToList();
         }
 
         /// <summary>
@@ -185,6 +188,25 @@
                 }
             }
             return personalInfo;
+        }
+
+        /// <summary>
+        /// Applies restriction to get data from requested page.
+        /// </summary>
+        /// <param name="personalInfo">Collection of personal data.</param>
+        /// <param name="pageSize">Size of portion of data.</param>
+        /// <param name="pageNumber">Number of requested page.</param>
+        /// <returns>Collection with applied selecting options.</returns>
+        private IQueryable<PersonInfo> GetPagedRecords(IQueryable<PersonInfo> personalInfo, int pageSize, int pageNumber)
+        {
+            if ((pageSize > 0) && (pageNumber > 0))
+            {
+                return personalInfo.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            }
+            else
+            {
+                return personalInfo;
+            }
         }
     }
 }
