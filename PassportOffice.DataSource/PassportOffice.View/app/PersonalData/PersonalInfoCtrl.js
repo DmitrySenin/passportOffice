@@ -57,6 +57,16 @@
 			vm.dateprickerPopup.opened = true;
 		};
 
+		// Searching config.
+		vm.Search = {
+			Reload: function() {
+				allDataLoaded = false;
+				currentPage = 1;
+				vm.PersonalInfo = [];
+				vm.getInfo();
+			}
+		};
+
 		// Inifinite scroll.
 		vm.InfiniteScroll = {
 			inLoading: false,
