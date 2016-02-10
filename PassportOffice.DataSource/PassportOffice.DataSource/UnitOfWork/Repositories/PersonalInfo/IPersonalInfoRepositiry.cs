@@ -4,6 +4,7 @@
     using System.Collections.Generic;
 
     using PassportOffice.DataSource.Model;
+    using PassportOffice.DataSource.Searching;
     
     /// <summary>
     /// Frame for implementing repository of personal data.
@@ -15,6 +16,13 @@
         /// </summary>
         /// <returns>All records of personal information.</returns>
         IEnumerable<PersonInfo> GetAll();
+
+        /// <summary>
+        /// Finds all data in source of data using searching criteria for selection.
+        /// </summary>
+        /// <param name="searchOptions">Searching criteria.</param>
+        /// <returns>All records which satisfies searching options.</returns>
+        IEnumerable<PersonInfo> SearchAll(PersonalInfoSearchingOptions searchOptions);
 
         /// <summary>
         /// Finds record with concrete unique identifier.
