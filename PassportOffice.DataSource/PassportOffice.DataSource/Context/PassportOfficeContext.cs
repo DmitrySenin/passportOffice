@@ -24,7 +24,7 @@
         /// <summary>
         /// All personal information in database.
         /// </summary>
-        public DbSet<PersonInfo> Persons { get; set; }
+        public virtual DbSet<PersonInfo> Persons { get; set; }
 
         /// <summary>
         /// Trigger of initializing of the context's model.
