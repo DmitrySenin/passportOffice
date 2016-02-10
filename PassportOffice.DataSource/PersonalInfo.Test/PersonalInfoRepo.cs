@@ -10,6 +10,7 @@
 
     using PassportOffice.DataSource.Context;
     using PassportOffice.DataSource.Model;
+    using PassportOffice.DataSource.Searching;
     using PassportOffice.DataSource.UnitOfWork.Repositories.PersonalInfo;
 
     /// <summary>
@@ -75,6 +76,26 @@
 
             // Check that all data was got from data source.
             CollectionAssert.AreEqual(orderedPersonInfo, persons);
+        }
+
+        /// <summary>
+        /// Check that collection will be empty if searching options contain non existing characteristic.
+        /// </summary>
+        [TestCase]
+        public void Should_CollectionIsEmpty()
+        {
+            var repo = new PersonalInfoRepository(passportOfficeContext);
+
+            // It's hack based on AutoFixture generated style.
+            // It add name of generated filed to forward of string.
+            var searchingOptions = new PersonalInfoSearchingOptions();
+            searchingOptions.FirstName = "Mike";
+            searchingOptions.LastName = "Shinoda";
+
+            var persons = repo.SearchAll(searchingOptions);
+
+            // Check that collection is empty.
+            Assert.AreEqual(persons.Count(), 0);
         }
 
         /// <summary>
