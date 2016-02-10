@@ -59,7 +59,22 @@
             var persons = repo.GetAll();
 
             // Check that all data was got from data source.
-            Assert.AreEqual(personInfo.Count(), persons.Count());
+            CollectionAssert.AreEquivalent(personInfo, persons);
+        }
+
+        /// <summary>
+        /// Check that returned data is ordered.
+        /// </summary>
+        [TestCase]
+        public void Should_OrderData()
+        {
+            var repo = new PersonalInfoRepository(passportOfficeContext);
+            var persons = repo.GetAll();
+
+            var orderedPersonInfo = this.sortPersonalInfo(this.personInfo);
+
+            // Check that all data was got from data source.
+            CollectionAssert.AreEqual(orderedPersonInfo, persons);
         }
 
         /// <summary>
@@ -104,6 +119,22 @@
             var passportOfficeContext = new Mock<PassportOfficeContext>();
             passportOfficeContext.Setup(c => c.Persons).Returns(personInfoSet);
             return passportOfficeContext.Object;
+        }
+
+        /// <summary>
+        /// Sort collection of personal information.
+        /// </summary>
+        /// <param name="personInfo">List of personal information records.</param>
+        /// <returns>Sorted collection with personal data.</returns>
+        private List<PersonInfo> sortPersonalInfo(List<PersonInfo> personInfo)
+        {
+            return personInfo
+                        .OrderBy(p => p.LastName)
+                        .ThenBy(p => p.FirstName)
+                        .ThenBy(p => p.MiddleName)
+                        .ThenBy(p => p.BirthdayDate)
+                        .ThenBy(p => p.PassportSeries)
+                        .ThenBy(p => p.PassportNumber).ToList();
         }
     }
 }
