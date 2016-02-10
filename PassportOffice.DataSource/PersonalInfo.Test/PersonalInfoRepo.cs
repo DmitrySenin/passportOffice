@@ -1,5 +1,6 @@
 ﻿namespace PersonalInfo.Test
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
@@ -86,8 +87,8 @@
         {
             var repo = new PersonalInfoRepository(passportOfficeContext);
 
-            // It's hack based on AutoFixture generated style.
-            // It add name of generated filed to forward of string.
+            // It's hack based on AutoFixture generating style.
+            // It add name of generated field to forward of string.
             var searchingOptions = new PersonalInfoSearchingOptions();
             searchingOptions.FirstName = "Mike";
             searchingOptions.LastName = "Shinoda";
@@ -96,6 +97,24 @@
 
             // Check that collection is empty.
             Assert.AreEqual(persons.Count(), 0);
+        }
+
+        /// <summary>
+        /// Check that each elemnent of collection satisfies searching options.
+        /// </summary>
+        [TestCase]
+        public void Should_SatisfySearchingCriteria_And_Ordered()
+        {
+            var repo = new PersonalInfoRepository(passportOfficeContext);
+            
+            var searchingOptions = this.createSearchOptions(this.personInfo);
+            var persons = repo.SearchAll(searchingOptions);
+
+            var searchAndOrderPersonalData = this.sortPersonalInfo(this.personInfo);
+            searchAndOrderPersonalData = this.searchPersonalData(searchAndOrderPersonalData, searchingOptions).ToList();
+
+            // Check that collection consist of same element in same order.
+            CollectionAssert.AreEqual(searchAndOrderPersonalData, persons);
         }
 
         /// <summary>
@@ -156,6 +175,81 @@
                         .ThenBy(p => p.BirthdayDate)
                         .ThenBy(p => p.PassportSeries)
                         .ThenBy(p => p.PassportNumber).ToList();
+        }
+
+        /// <summary>
+        /// Create random searching options based on passed collection of personal data.
+        /// </summary>
+        /// <param name="personInfo">Personal data which is used to generate options.</param>
+        /// <returns>Searching options which can be used to find at least one record from passed collection.</returns>
+        private PersonalInfoSearchingOptions createSearchOptions(IEnumerable<PersonInfo> personInfo)
+        {
+            Random rnd = new Random();
+            int index = rnd.Next(personInfo.Count());
+
+            string rndLastName = personInfo.ElementAt(index).LastName;
+
+            PersonalInfoSearchingOptions searchingOption = new PersonalInfoSearchingOptions();
+
+            // get random substring of random last name.
+            searchingOption.LastName = rndLastName.Substring(0, rnd.Next(rndLastName.Length));
+
+            return searchingOption;
+        }
+
+        /// <summary>
+        /// Execute seacrhing over collection of personal data using passed parameters.
+        /// </summary>
+        /// <param name="personalInfo">Collection to search over.</param>
+        /// <param name="searchingOptions">Searching criteria.</param>
+        /// <returns>Collection consists of elements which satisfy searching criteria.</returns>
+        private IEnumerable<PersonInfo> searchPersonalData(IEnumerable<PersonInfo> personalInfo, PersonalInfoSearchingOptions searchingOptions)
+        {
+            // Create temorary storage.
+            IEnumerable<PersonInfo> searchedPersonalData = personalInfo;
+
+            if (PersonalInfoSearchingOptions.CheckSearchingOptions(searchingOptions))
+            {
+                // Add searching by first name if need
+                if (searchingOptions.UseFirstName())
+                {
+                    searchedPersonalData = personalInfo.Where(p => p.FirstName.StartsWith(searchingOptions.FirstName));
+                }
+
+                // Add searching by last name if need
+                if (searchingOptions.UseLastName())
+                {
+                    searchedPersonalData = personalInfo.Where(p => p.LastName.StartsWith(searchingOptions.LastName));
+                }
+
+                // Add searching by middle name if need
+                if (searchingOptions.UseMiddleName())
+                {
+                    searchedPersonalData = personalInfo.Where(p => p.MiddleName.StartsWith(searchingOptions.MiddleName));
+                }
+
+                // Add searching by series of passport if need
+                if (searchingOptions.UsePassportSeries())
+                {
+                    searchedPersonalData = personalInfo.Where(p => p.PassportSeries.StartsWith(searchingOptions.PassportSeries));
+                }
+
+                // Add searching by number of passport if need
+                if (searchingOptions.UsePassportNumber())
+                {
+                    searchedPersonalData = personalInfo.Where(p => p.PassportNumber.StartsWith(searchingOptions.PassportNumber));
+                }
+
+                // Add searching by date of birthday if need
+                if (searchingOptions.UseBirthdayDate())
+                {
+                    searchedPersonalData = personalInfo.Where(p => p.BirthdayDate.Year == searchingOptions.BirthdayDate.Value.Year
+                                                            && p.BirthdayDate.Month == searchingOptions.BirthdayDate.Value.Month
+                                                            && p.BirthdayDate.Day == searchingOptions.BirthdayDate.Value.Day);
+                }
+            }
+
+            return searchedPersonalData.ToList();
         }
     }
 }
