@@ -118,6 +118,31 @@
         }
 
         /// <summary>
+        /// Check that each elemnent of collection satisfies searching options.
+        /// </summary>
+        [TestCase]
+        public void Should_SatisfySearchingCriteriaAndOrderedAndPaged()
+        {
+            int pageSize = 10;
+            int pageNumber = 1;
+
+            var repo = new PersonalInfoRepository(passportOfficeContext);
+
+            var searchingOptions = this.createSearchOptions(this.personInfo);
+            var persons = repo.GetPage(pageSize, pageNumber, searchingOptions);
+
+            var testPersonalData = this.sortPersonalInfo(this.personInfo);
+            testPersonalData = this.searchPersonalData(testPersonalData, searchingOptions).ToList();
+            testPersonalData = this.getPageOfPersonalData(testPersonalData, pageSize, pageNumber).ToList();
+
+            // Amount of records is correct.
+            Assert.LessOrEqual(persons.Count(), pageSize);
+            
+            // Check that collection consist of same element in same order.
+            CollectionAssert.AreEqual(testPersonalData, persons);
+        }
+
+        /// <summary>
         /// Generate test data and set it in container.
         /// </summary>
         private List<PersonInfo> createPersonInfoContainer()
@@ -250,6 +275,25 @@
             }
 
             return searchedPersonalData.ToList();
+        }
+
+        /// <summary>
+        /// Paged collection of personal data.
+        /// </summary>
+        /// <param name="personInfo">Collection of persoanal data.</param>
+        /// <param name="pageSize">Amount records on one page.</param>
+        /// <param name="pageNumber">Number of requested page.</param>
+        /// <returns>Collection of personal information which placed on requested page.</returns>
+        private IEnumerable<PersonInfo> getPageOfPersonalData(IEnumerable<PersonInfo> personInfo, int pageSize, int pageNumber)
+        {
+            if (pageSize > 0 && pageNumber > 0)
+            {
+                return personInfo.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            }
+            else
+            {
+                return personInfo;
+            }
         }
     }
 }
