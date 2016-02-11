@@ -62,6 +62,10 @@
     <Compile Include="Migrations\201602011330487_AddPersonalInfo.Designer.cs">
       <DependentUpon>201602011330487_AddPersonalInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602111124490_ImplementAuth.cs" />
+    <Compile Include="Migrations\201602111124490_ImplementAuth.Designer.cs">
+      <DependentUpon>201602111124490_ImplementAuth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\PersonInfo.cs" />
     <Compile Include="Model\User.cs" />
@@ -80,6 +84,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201602011330487_AddPersonalInfo.resx">
       <DependentUpon>201602011330487_AddPersonalInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602111124490_ImplementAuth.resx">
+      <DependentUpon>201602111124490_ImplementAuth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
