@@ -69,6 +69,8 @@
     <Compile Include="Searching\PersonalInfoSearchingOptions.cs" />
     <Compile Include="UnitOfWork\Repositories\PersonalInfo\IPersonalInfoRepositiry.cs" />
     <Compile Include="UnitOfWork\Repositories\PersonalInfo\PersonalInfoRepository.cs" />
+    <Compile Include="UnitOfWork\Repositories\Users\IUsersRepository.cs" />
+    <Compile Include="UnitOfWork\Repositories\Users\UsersRepository.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
