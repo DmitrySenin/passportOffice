@@ -3,12 +3,14 @@
     using System.Data.Entity;
     using System.Data.Entity.ModelConfiguration.Conventions;
 
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     using PassportOffice.DataSource.Model;
 
     /// <summary>
     /// Context of connection to database. 
     /// </summary>
-    class PassportOfficeContext : DbContext
+    class PassportOfficeContext : IdentityDbContext<IdentityUser>
     {
         /// <summary>
         /// Create instance of <see cref="PassportOfficeContext"/> class.
