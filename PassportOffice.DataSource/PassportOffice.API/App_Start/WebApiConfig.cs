@@ -1,7 +1,10 @@
 ﻿namespace PassportOffice.API
 {
+    using System.Linq;
     using System.Net.Http.Formatting;
     using System.Web.Http;
+
+    using Newtonsoft.Json.Serialization;
 
     public static class WebApiConfig
     {
@@ -18,6 +21,9 @@
             // Setting of formatters
             config.Formatters.Clear();
             config.Formatters.Add(new JsonMediaTypeFormatter());
+
+            var jsonFromatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
+            jsonFromatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
     }
 }
