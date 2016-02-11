@@ -17,6 +17,8 @@
         /// </summary>
         public PassportOfficeContext() : base("PassportOfficeContext")
         {
+            // Set 4 minutes timeout of getting information from database.
+            this.Database.CommandTimeout = 240;
         }
 
         /// <summary>
