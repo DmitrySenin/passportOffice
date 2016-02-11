@@ -67,11 +67,11 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Searching\PersonalInfoSearchingOptions.cs" />
-    <Compile Include="UnitOfWork\Repositories\PersonalInfo\IPersonalInfoRepositiry.cs" />
-    <Compile Include="UnitOfWork\Repositories\PersonalInfo\PersonalInfoRepository.cs" />
-    <Compile Include="UnitOfWork\Repositories\Users\IUsersRepository.cs" />
-    <Compile Include="UnitOfWork\Repositories\Users\UsersRepository.cs" />
-    <Compile Include="UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="DataAccess\Repositories\PersonalInfo\IPersonalInfoRepositiry.cs" />
+    <Compile Include="DataAccess\Repositories\PersonalInfo\PersonalInfoRepository.cs" />
+    <Compile Include="DataAccess\Repositories\Users\IUsersRepository.cs" />
+    <Compile Include="DataAccess\Repositories\Users\UsersRepository.cs" />
+    <Compile Include="DataAccess\RepositoriesUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

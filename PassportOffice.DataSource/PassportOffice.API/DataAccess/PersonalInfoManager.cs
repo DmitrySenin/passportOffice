@@ -3,7 +3,7 @@
     using System.Collections.Generic;
 
     using PassportOffice.DataSource.Model;
-    using PassportOffice.DataSource.UnitOfWork;
+    using PassportOffice.DataSource.DataAccess;
     using PassportOffice.DataSource.Searching;
 
     /// <summary>
@@ -14,14 +14,14 @@
         /// <summary>
         /// Collection of repositories contains information from database.
         /// </summary>
-        private UnitOfWork reposCollection;
+        private RepositoriesUnit reposCollection;
 
         /// <summary>
         /// Create instance of <see cref="PersonalInfoManager"/> class.
         /// </summary>
         public PersonalInfoManager()
         {
-            reposCollection = new UnitOfWork();
+            reposCollection = new RepositoriesUnit();
         }
 
         /// <summary>

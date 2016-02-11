@@ -1,16 +1,16 @@
-﻿namespace PassportOffice.DataSource.UnitOfWork
+﻿namespace PassportOffice.DataSource.DataAccess
 {
     using System;
 
     using PassportOffice.DataSource.Context;
-    using PassportOffice.DataSource.UnitOfWork.Repositories.PersonalInfo;
-    using PassportOffice.DataSource.UnitOfWork.Repositories.Users;
+    using PassportOffice.DataSource.DataAccess.Repositories.PersonalInfo;
+    using PassportOffice.DataSource.DataAccess.Repositories.Users;
 
     /// <summary>
     /// Container of repositories working with database.
     /// It guarantees that all repositories will work with one context of database.
     /// </summary>
-    public class UnitOfWork : IDisposable
+    public class RepositoriesUnit : IDisposable
     {
         /// <summary>
         /// Flag which identifies that object was already disposed.
