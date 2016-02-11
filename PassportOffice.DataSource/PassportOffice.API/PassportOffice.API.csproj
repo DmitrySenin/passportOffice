@@ -113,6 +113,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\PersonalInfoController.cs" />
     <Compile Include="DataAccess\PersonalInfoManager.cs" />
+    <Compile Include="DataAccess\UsersManager.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
