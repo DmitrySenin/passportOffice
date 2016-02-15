@@ -14,15 +14,17 @@
         /// <summary>
         /// Finds all data in source of data.
         /// </summary>
+        /// <param name="fullSort">Flag which identifies that records should be ordered by all discussed fields or only by ID.</param>
         /// <returns>All records of personal information.</returns>
-        IEnumerable<PersonInfo> GetAll();
+        IEnumerable<PersonInfo> GetAll(bool fullSort = false);
 
         /// <summary>
         /// Finds all data in source of data using searching criteria for selection.
         /// </summary>
         /// <param name="searchOptions">Searching criteria.</param>
+        /// <param name="fullSort">Flag which identifies that records should be ordered by all discussed fields or only by ID.</param>
         /// <returns>All records which satisfy searching options.</returns>
-        IEnumerable<PersonInfo> SearchAll(PersonalInfoSearchingOptions searchOptions);
+        IEnumerable<PersonInfo> SearchAll(PersonalInfoSearchingOptions searchOptions, bool fullSort = false);
 
         /// <summary>
         /// Selecting portion of personal date based on passed criteria.
@@ -30,8 +32,9 @@
         /// <param name="pageSize">Size of returned portion.</param>
         /// <param name="pageNumber">Number of returned portion.</param>
         /// <param name="searchOptions">Criteria of selecting records.</param>
+        /// <param name="fullSort">Flag which identifies that records should be ordered by all discussed fields or only by ID.</param>
         /// <returns>Records of personal information which satisfy criteria.</returns>
-        IEnumerable<PersonInfo> GetPage(int pageSize, int pageNumber, PersonalInfoSearchingOptions searchOptions);
+        IEnumerable<PersonInfo> GetPage(int pageSize, int pageNumber, PersonalInfoSearchingOptions searchOptions, bool fullSort = false);
 
         /// <summary>
         /// Finds record with concrete unique identifier.
