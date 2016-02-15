@@ -66,6 +66,10 @@
     <Compile Include="Migrations\201602111124490_ImplementAuth.Designer.cs">
       <DependentUpon>201602111124490_ImplementAuth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602151347127_PersonalInfoRestrictions.cs" />
+    <Compile Include="Migrations\201602151347127_PersonalInfoRestrictions.Designer.cs">
+      <DependentUpon>201602151347127_PersonalInfoRestrictions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\PersonInfo.cs" />
     <Compile Include="Model\User.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602111124490_ImplementAuth.resx">
       <DependentUpon>201602111124490_ImplementAuth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602151347127_PersonalInfoRestrictions.resx">
+      <DependentUpon>201602151347127_PersonalInfoRestrictions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
