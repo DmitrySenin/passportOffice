@@ -22,8 +22,9 @@
 		 * Load personal data and set value of context variables.
 		 */
 		vm.getInfo = function() {
-			PersonalInfoLoader.Load(pageSize, currentPage, fullSort, SearchingOptions)
+			PersonalInfoLoader.Load(pageSize, currentPage, fullSort, searchingOptions)
 				.success(function(data) {
+					// Handle gathered data.
 					data.map(function(item, index, arr) {
 						arr[index].BirthdayDate = new Date(item.BirthdayDate);
 						arr[index].PassportIssueDate = new Date(item.PassportIssueDate);
@@ -69,6 +70,10 @@
 		$rootScope.$on(EventNames.Search, function(event, SearchingOptions, FullSort) {
 			fullSort = FullSort;
 			searchingOptions = SearchingOptions;
+			currentPage = 1;
+			allDataLoaded = false;
+			vm.PersonalInfo = [];
+			vm.getInfo();
 		});
 	}
 })();
