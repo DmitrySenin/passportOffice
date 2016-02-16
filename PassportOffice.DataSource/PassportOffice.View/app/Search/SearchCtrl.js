@@ -1,11 +1,11 @@
 ;(function() {
 	'use strict';
-	
+
 	angular
 		.module('main')
 		.controller('SearchCtrl', SearchCtrl);
 
-	PersonalInfoCtrl.$inject = ['PersonalInfoLoader'];
+	SearchCtrl.$inject = ['PersonalInfoLoader'];
 
 	function SearchCtrl(PersonalInfoLoader) {
 		var vm = this;
