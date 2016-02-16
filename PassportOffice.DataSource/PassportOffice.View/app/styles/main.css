@@ -17,6 +17,14 @@ body {
 	padding: 10px;
 	border: 1px solid #777;
 	border-radius: 5px;
+	position: relative;
+}
+
+#search-panel #panel-label {
+	position: absolute;
+	top: -12px;
+	left: 10px;
+	background: #fafafa;
 }
 
 .search-option {
@@ -30,6 +38,7 @@ body {
 .search-option input[type="text"] {
 	width: 130px;
 }
+
 
 /*Personal data container*/
 
