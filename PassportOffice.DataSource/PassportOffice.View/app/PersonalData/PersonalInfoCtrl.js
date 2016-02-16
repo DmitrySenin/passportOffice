@@ -17,11 +17,13 @@
 			searchingOptions = new PersonalInfoLoader.SearchingOptions();
 
 		vm.PersonalInfo = [];
+		vm.SpinnerKey = 'LoadingSpinner';
 
 		/**
 		 * Load personal data and set value of context variables.
 		 */
 		vm.getInfo = function() {
+			startSpinner();
 			PersonalInfoLoader.Load(pageSize, currentPage, fullSort, searchingOptions)
 				.success(function(data) {
 					// Handle gathered data.
@@ -35,13 +37,12 @@
 					if(data.length < pageSize) {
 						allDataLoaded = true;
 					}
-
-
-					vm.InfiniteScroll.inLoading = false;
 				})
 				.error(function(error) {
 					vm.error = error;
-
+				})
+				.finally(function() {
+					stopSpinner();
 					vm.InfiniteScroll.inLoading = false;
 				});
 		}
@@ -75,5 +76,13 @@
 			vm.PersonalInfo = [];
 			vm.getInfo();
 		});
+
+		function startSpinner() {
+			usSpinnerService.spin(vm.SpinnerKey);
+		}
+
+		function stopSpinner() {
+			usSpinnerService.stop(vm.SpinnerKey);
+		}
 	}
 })();

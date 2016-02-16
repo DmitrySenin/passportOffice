@@ -139,3 +139,10 @@ th:last-child {
 	color: #444;
 	text-shadow: 0 1px 0 #fff;
 }
+
+span[us-spinner] {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 5;
+}
