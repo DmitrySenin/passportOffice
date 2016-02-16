@@ -11,6 +11,7 @@
 		var vm = this;
 
 		vm.SearchingOptions = new PersonalInfoLoader.SearchingOptions();
+		vm.NeedSort = false;
 
 		// Represents datepicker's state.
 		vm.dateprickerPopup = {
