@@ -11,7 +11,7 @@
 
 		var vm = this,
 			currentPage = 1,
-			pageSize = 10,
+			pageSize = 20,
 			allDataLoaded = false,
 			fullSort = false,
 			searchingOptions = new PersonalInfoLoader.SearchingOptions();
