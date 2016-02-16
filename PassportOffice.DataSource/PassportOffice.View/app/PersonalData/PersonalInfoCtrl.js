@@ -5,23 +5,24 @@
 		.module('main')
 		.controller("PersonalInfoCtrl", PersonalInfoCtrl);
 
-	PersonalInfoCtrl.$inject = ['PersonalInfoLoader'];
+	PersonalInfoCtrl.$inject = ['PersonalInfoLoader', 'EventNames', '$rootScope'];
 
-	function PersonalInfoCtrl(PersonalInfoLoader) {
+	function PersonalInfoCtrl(PersonalInfoLoader, EventNames, $rootScope) {
 
 		var vm = this,
 			currentPage = 1,
 			pageSize = 10,
-			allDataLoaded = false;
+			allDataLoaded = false,
+			fullSort = false,
+			searchingOptions = new PersonalInfoLoader.SearchingOptions();
 
 		vm.PersonalInfo = [];
-		vm.SearchingOptions = new PersonalInfoLoader.SearchingOptions();
 
 		/**
 		 * Load personal data and set value of context variables.
 		 */
 		vm.getInfo = function() {
-			PersonalInfoLoader.Load(pageSize, currentPage, vm.SearchingOptions)
+			PersonalInfoLoader.Load(pageSize, currentPage, SearchingOptions)
 				.success(function(data) {
 					data.map(function(item, index, arr) {
 						arr[index].BirthdayDate = new Date(item.BirthdayDate);
@@ -58,5 +59,16 @@
 				}
 			}
 		};
+
+		/**
+		 * Handles of changing searching parameters.
+		 * @param  {Object} event Description of handled event.
+		 * @param  {Object} SearchingOptions Object with criteria of data selection.
+		 * @param  {Boolean} FullSort Flag which identifies that data should be sorted by all discussed fields.
+		 */
+		$rootScope.$on(EventNames.Search, function(event, SearchingOptions, FullSort) {
+			fullSort = FullSort;
+			searchingOptions = SearchingOptions;
+		});
 	}
 })();
