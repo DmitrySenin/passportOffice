@@ -24,12 +24,16 @@
         /// <summary>
         /// Finds all data at data storage.
         /// </summary>
+        /// <param name="pageSize">Amount of records on one page.</param>
+        /// <param name="pageNumber">Number of page with personal data.</param>
+        /// <param name="fullSort">Flag to sorting data by all fields.</param>
+        /// <param name="searchOptions">Criteria to select data.</param>
         /// <returns>All records of personal information from data source.</returns>
-        [Route("{pageSize:int}/{pageNumber:int}")]
+        [Route("{pageSize:int}/{pageNumber:int}/{fullSort:bool}")]
         [HttpGet]
-        public IEnumerable<PersonInfo> GetAll(int pageSize, int pageNumber, [FromUri] PersonalInfoSearchingOptions searchOptions)
+        public IEnumerable<PersonInfo> GetAll(int pageSize, int pageNumber, bool fullSort, [FromUri] PersonalInfoSearchingOptions searchOptions)
         {
-            return personalInfoManager.GetPagedList(pageSize, pageNumber, searchOptions);
+            return personalInfoManager.GetPagedList(pageSize, pageNumber, searchOptions, fullSort);
         }
     }
 }
