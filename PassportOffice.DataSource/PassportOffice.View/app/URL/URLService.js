@@ -18,10 +18,11 @@
 		 * Create URL to API to getting passport data.
 		 * @param {Numeric} pageSize Amount of personal information records per one page.
 		 * @param {Numeric} pagenumber Number of requested page of date.
+		 * @param {Boolean} fullSort Flag to sorting data by all fields.
 		 * @return {string} URL for requesting personal data from server. 
 		 */
-		this.BuildPersonalInfoGetURL = function(pageSize, pageNumber) {
-			return BASE_URL + "personalinfo/" + pageSize + "/" + pageNumber + "/false";
+		this.BuildPersonalInfoGetURL = function(pageSize, pageNumber, fullSort) {
+			return BASE_URL + "personalinfo/" + pageSize + "/" + pageNumber + "/" + fullSort;
 		}
 	}
 })();

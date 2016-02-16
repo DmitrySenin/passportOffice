@@ -22,7 +22,7 @@
 		 * Load personal data and set value of context variables.
 		 */
 		vm.getInfo = function() {
-			PersonalInfoLoader.Load(pageSize, currentPage, SearchingOptions)
+			PersonalInfoLoader.Load(pageSize, currentPage, fullSort, SearchingOptions)
 				.success(function(data) {
 					data.map(function(item, index, arr) {
 						arr[index].BirthdayDate = new Date(item.BirthdayDate);

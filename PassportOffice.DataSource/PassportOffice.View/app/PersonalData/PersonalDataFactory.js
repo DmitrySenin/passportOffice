@@ -28,11 +28,12 @@
 		/**
 		 * Carries out request for getting information from passed URL.
 		 * @param {Numeric} pageSize Count of records on one page.
-		 * @param {String} pageNumber Number 
+		 * @param {Numeric} pageNumber Number 
+		 * @param {Boolean} fullSort Flag to sorting data by all fields.
 		 * @return {Promise}     Promise which represents flow of request.
 		 */
-		function Load(pageSize, pageNumber, searchingOptions) {
-			return $http.get(URLService.BuildPersonalInfoGetURL(pageSize, pageNumber), { params : searchingOptions });
+		function Load(pageSize, pageNumber, fullSort, searchingOptions) {
+			return $http.get(URLService.BuildPersonalInfoGetURL(pageSize, pageNumber, fullSort), { params : searchingOptions });
 		};
 	};
 })();
