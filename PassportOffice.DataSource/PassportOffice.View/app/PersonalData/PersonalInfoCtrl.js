@@ -5,9 +5,9 @@
 		.module('main')
 		.controller("PersonalInfoCtrl", PersonalInfoCtrl);
 
-	PersonalInfoCtrl.$inject = ['PersonalInfoLoader', 'EventNames', '$rootScope'];
+	PersonalInfoCtrl.$inject = ['PersonalInfoLoader', 'EventNames', '$rootScope', 'usSpinnerService'];
 
-	function PersonalInfoCtrl(PersonalInfoLoader, EventNames, $rootScope) {
+	function PersonalInfoCtrl(PersonalInfoLoader, EventNames, $rootScope, usSpinnerService) {
 
 		var vm = this,
 			currentPage = 1,
