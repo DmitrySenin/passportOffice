@@ -37,7 +37,7 @@
 				</div>
 				<div class="search-option">
 					<label for="BirthdayDate">Birthday date</label>
-					<input name="BirthdayDate" type="text" ng-model="search.SearchingOptions.BirthdayDate">
+					<input name="BirthdayDate" type="text" ng-model="search.SearchingOptions.BirthdayDate" uib-datepicker-popup="yyyy-MM-dd" is-open="search.dateprickerPopup.opened" close-text="Close" ng-click="search.openDatepickerPopup()">
 				</div>
 				<div class="search-option">
 					<label for="PassportSeries">Passport series</label>
