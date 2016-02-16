@@ -47,7 +47,7 @@
 					<label for="PassportNumber">Passport number</label>
 					<input name="PassportNumber" type="text" ng-model="search.SearchingOptions.PassportNumber">
 				</div>
-				<input type="button" id="start-search" class="btn" value="Search">
+				<input type="button" id="start-search" class="btn" value="Search" ng-click="search.StartSearch()">
 				<div class="">
 					<label for="Order">Order</label>
 					<input name="Order" type="checkbox" class="checkbox-inline" ng-model="search.NeedSort">
