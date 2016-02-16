@@ -21,6 +21,34 @@
 </head>
 <body>
 	<div ng-app="main">
+		<div ng-controller="SearchCtrl as search">
+			<div id="search-panel">
+				<div class="search-option">
+					<label for="LastName">Last name</label>
+					<input name="LastName" type="text">
+				</div>
+				<div class="search-option">
+					<label for="FirstName">First name</label>
+					<input name="FirstName" type="text">
+				</div>
+				<div class="search-option">
+					<label for="MiddleName">Middle name</label>
+					<input name="MiddleName" type="text">
+				</div>
+				<div class="search-option">
+					<label for="BirthdayDate">Birthday date</label>
+					<input name="BirthdayDate" type="text">
+				</div>
+				<div class="search-option">
+					<label for="PassportSeries">Passport series</label>
+					<input name="PassportSeries" type="text">
+				</div>
+				<div class="search-option">
+					<label for="PassportNumber">Passport number</label>
+					<input name="PassportNumber" type="text">
+				</div>
+			</div>
+		</div>
 		<div ng-controller="PersonalInfoCtrl as personalInfo">
 			<table id="personalInfoContainer">
 				<thead>

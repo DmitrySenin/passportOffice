@@ -7,6 +7,30 @@ body {
 	text-shadow: 0 1px 0 #fff;
 }
 
+
+/*Searching panel*/
+
+#search-panel {
+	display: block;
+	width: 1000px;
+	margin: 30px auto;
+	padding: 10px;
+	border: 1px solid #777;
+	border-radius: 5px;
+}
+
+.search-option {
+	display: inline-block;
+}
+
+.search-option label {
+	display: block;
+}
+
+.search-option input {
+	width: 130px;
+}
+
 /*Personal data container*/
 
 /*Common styles of personal data container.*/
