@@ -27,7 +27,7 @@ body {
 	display: block;
 }
 
-.search-option input {
+.search-option input[type="text"] {
 	width: 130px;
 }
 
