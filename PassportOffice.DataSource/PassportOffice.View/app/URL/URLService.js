@@ -21,7 +21,7 @@
 		 * @return {string} URL for requesting personal data from server. 
 		 */
 		this.BuildPersonalInfoGetURL = function(pageSize, pageNumber) {
-			return BASE_URL + "personalinfo/" + pageSize + "/" + pageNumber;
+			return BASE_URL + "personalinfo/" + pageSize + "/" + pageNumber + "/false";
 		}
 	}
 })();
