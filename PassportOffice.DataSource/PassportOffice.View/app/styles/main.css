@@ -7,6 +7,18 @@ body {
 	text-shadow: 0 1px 0 #fff;
 }
 
+/*Site's header*/
+
+header#site-header {
+	padding: 10px;
+	border-bottom: 3px solid #777;
+	box-shadow: 1px 1px #ddd;
+	background: #F4F4F4;
+	margin: 5px 10px 10px;
+	border-radius: 10px;
+	position: relative;
+	height: 50px;
+}
 
 /*Searching panel*/
 
