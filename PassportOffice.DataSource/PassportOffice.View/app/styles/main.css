@@ -20,6 +20,11 @@ header#site-header {
 	height: 50px;
 }
 
+#site-header #header-lbl {
+	font-size: 30px;
+	line-height: 30px;
+}
+
 /*Searching panel*/
 
 #search-panel {
