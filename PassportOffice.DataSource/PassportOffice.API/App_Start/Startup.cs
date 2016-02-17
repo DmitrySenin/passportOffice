@@ -28,6 +28,7 @@ namespace PassportOffice.API.App_Start
             this.ConfigureOAuth(app);
 
             app.UseWebApi(config);
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
         }
 
         /// <summary>
