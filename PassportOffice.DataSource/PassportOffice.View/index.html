@@ -19,6 +19,7 @@
 	<script type="text/javascript" src="app/PersonalData/PersonalDataFactory.js"></script>
 	<script type="text/javascript" src="app/PersonalData/PersonalInfoCtrl.js"></script>
 	<script type="text/javascript" src="app/Search/SearchCtrl.js"></script>
+	<script type="text/javascript" src="app/Users/AuthService.js"></script>
 	<script type="text/javascript" src="app/Users/UsersCtrl.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="app/styles/main.css">
@@ -29,7 +30,8 @@
 		<div ng-controller="UsersCtrl as users">
 			<div id="user-container">
 				<div id="login" class="dropdown">
-					<input type="button" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" value="Login">
+					<input type="button" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" value="Sign in" ng-hide='users.IsAuthenticated'>
+					<input type="button" class="btn btn-primary" value="Sign out" ng-show='users.IsAuthenticated' ng-click='users.Logout()'>
 		            <div class="dropdown-menu">
 		              	<form id="formLogin" class="form container-fluid">
 			                <br>
@@ -39,7 +41,13 @@
 			                <div class="form-group">	
 			                	<input class="form-control" ng-model="users.password" placeholder="Password" type="password">
 			                </div>  
-			                <button type="button" id="btnLogin" class="btn btn-block">Login</button>
+			                <button type="button" id="btnLogin" class="btn btn-block" ng-click="users.Login()">Login</button>
+			                <div ng-hide="users.IsAuthSuccess">
+			                	<hr>
+			                	<label>Errors:</label>
+			                	<br>
+			                	<span class="error">Combination of login and password is incorrect.</span>
+			                </div>
 		              	</form>
 		            </div>
 	            </div>
