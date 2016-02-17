@@ -7,6 +7,13 @@
 
 	function UsersCtrl() {
 		var vm = this;
+
+		createCredentialsFields();
+
+		function createCredentialsFields() {
+			vm.username = '';
+			vm.password = '';
+		}
 	}
 
 })();

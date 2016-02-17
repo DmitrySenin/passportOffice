@@ -1,0 +1,13 @@
+#user-container {
+	padding: 10px;
+	border-bottom: 3px solid #777;
+	box-shadow: 1px 1px #ddd;
+	background: #F4F4F4;
+	margin: 5px 10px 10px;
+	border-radius: 10px;
+	text-align: right;
+}
+
+#user-container .dropdown-menu {
+	left: 90%;
+}
