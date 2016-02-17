@@ -24,5 +24,13 @@
 		this.BuildPersonalInfoGetURL = function(pageSize, pageNumber, fullSort) {
 			return BASE_URL + "personalinfo/" + pageSize + "/" + pageNumber + "/" + fullSort;
 		}
+
+		/**
+		 * Create URL to API to login user.
+		 * @return {String} URL to server to check credentials.
+		 */
+		this.BuildLoginURL = function() {
+			return BASE_URL + 'token';
+		}
 	}
 })();
