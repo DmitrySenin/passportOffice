@@ -21,9 +21,6 @@
             // Setting of formatters
             config.Formatters.Clear();
             config.Formatters.Add(new JsonMediaTypeFormatter());
-
-            var jsonFromatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
-            jsonFromatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
     }
 }
