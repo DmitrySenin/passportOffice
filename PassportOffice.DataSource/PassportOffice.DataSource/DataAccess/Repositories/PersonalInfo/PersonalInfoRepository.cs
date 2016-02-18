@@ -1,4 +1,4 @@
-﻿namespace PassportOffice.DataSource.UnitOfWork.Repositories.PersonalInfo
+﻿namespace PassportOffice.DataSource.DataAccess.Repositories.PersonalInfo
 {
     using System;
     using System.Collections.Generic;
