@@ -24,5 +24,12 @@
         /// <param name="user">User's credentials.</param>
         /// <returns>Flag which identifies that user exists.</returns>
         bool DoesExist(User user);
+
+        /// <summary>
+        /// Checks that user is administrator.
+        /// </summary>
+        /// <param name="userName">Login name of user.</param>
+        /// <returns>Flag which identifies that user is administrator.</returns>
+        bool IsAdmin(string userName);
     }
 }

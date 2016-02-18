@@ -6,6 +6,7 @@
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using PassportOffice.DataSource.Context;
+    using PassportOffice.DataSource.DataAccess.Repositories.Roles;
     using PassportOffice.DataSource.Model;
 
     /// <summary>
@@ -59,6 +60,24 @@
         public IdentityUser FindUser(User user)
         {
             return this.userManager.Find(user.UserName, user.Password);
+        }
+
+        /// <summary>
+        /// Verifies that user was attached to admin role.
+        /// </summary>
+        /// <param name="userName">Login name of user.</param>
+        /// <returns>Flag which identifies that user is administrator.</returns>
+        public bool IsAdmin(string userName)
+        {
+            IdentityUser user = this.userManager.FindByName(userName);
+
+            // User doesn't exist.
+            if (user == null)
+            {
+                return false;
+            }
+
+            return this.userManager.IsInRole(user.Id, RolesRepository.AdminRoleId);
         }
 
         /// <summary>
