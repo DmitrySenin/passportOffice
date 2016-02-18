@@ -5,9 +5,9 @@
 		.module('main')
 		.controller('UsersCtrl', UsersCtrl);
 
-	UsersCtrl.$inject = ['AuthService'];
+	UsersCtrl.$inject = ['AuthService', 'AuthenticationInfoStorage'];
 
-	function UsersCtrl(AuthService) {
+	function UsersCtrl(AuthService, AuthenticationInfoStorage) {
 		var vm = this;
 
 		catchAuthenticationFlag(vm);
@@ -51,7 +51,7 @@
 		 * @param {Object} scope Object where credentials should be added.
 		 */
 		function catchAuthenticationFlag(scope) {
-			vm.IsAuthenticated = AuthService.IsAuthenticated;
+			vm.IsAuthenticated = AuthenticationInfoStorage.IsAuthenticated;
 		}
 
 		/**

@@ -5,36 +5,10 @@
 		.module('main')
 		.factory('AuthService', AuthService);
 
-	AuthService.$inject = ['$http', '$q', 'URLService'];
+	AuthService.$inject = ['$http', '$q', 'URLService', 'AuthenticationInfoStorage'];
 
-	function AuthService($http, $q, URLService) {
+	function AuthService($http, $q, URLService, AuthenticationInfoStorage) {
 		
-		/**
-		 * Creates authentication information object.
-		 *
-		 * @return {Object} Object which fields represent authentication state of current user.
-		 */
-		function AuthInfo() {
-			this.isAuthenticated = false;
-			this.userName = '';
-			this.token = undefined;
-			this.Set = function(isAuthenticated, userName, token) {
-				this.isAuthenticated = isAuthenticated;
-				this.userName = userName; 
-				this.token = token;
-			};
-		}
-
-		/**
-		 * Set authentication setting to default values.
-		 * @param {Object} authInfo Object represnts authentication state.
-		 */
-		AuthInfo.Reset = function(authInfo) {
-			authInfo.Set(false, '', undefined);
-		};
-
-		var authInfo = new AuthInfo();
-
 		/**
 		 * Try to login user with passed credentials.
 		 * 
@@ -55,7 +29,7 @@
 
 			$http.post(URLService.BuildLoginURL(), data, config).success(function(response){
 
-				authInfo.Set(true, username, response.access_token);
+				AuthenticationInfoStorage.SetInfo(true, username, response.access_token);
 
 				deferred.resolve(response);
 
@@ -73,20 +47,11 @@
 		 * Sign out current user.
 		 */
 		function logout() {
-			AuthInfo.Reset(authInfo);
+			AuthenticationInfoStorage.ResetInfo();
 		};
 
 		// Factory desciption.
 		return {
-			get IsAuthenticated() {
-				return authInfo.isAuthenticated;
-			},
-			get UserName() {
-				return authInfo.userName;
-			},
-			get AccessToken() {
-				return authInfo.token;
-			},
 			Login: login,
 			Logout: logout
 		};
