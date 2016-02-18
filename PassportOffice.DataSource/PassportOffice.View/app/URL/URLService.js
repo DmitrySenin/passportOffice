@@ -34,6 +34,14 @@
 		}
 
 		/**
+		 * Create URL to API to remove alld personal data.
+		 * @return {String} URL to method of clear personal data repository.
+		 */
+		this.BuildPersonalInfoRemoveAllURL = function() {
+			return BuildPersonalInfoURL();
+		}
+
+		/**
 		 * Create URL to API to login user.
 		 * @return {String} URL to server to check credentials.
 		 */
