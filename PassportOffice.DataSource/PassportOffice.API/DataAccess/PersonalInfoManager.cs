@@ -57,5 +57,13 @@
         {
             return this.reposCollection.PersonalInfoRepository.GetPage(pageSize, pageNumber, searchingOptions, fullSort);
         }
+
+        /// <summary>
+        /// Deletes all records of persona information from database.
+        /// </summary>
+        public void RemoveAll()
+        {
+            this.reposCollection.PersonalInfoRepository.RemoveAll();
+        }
     }
 }
