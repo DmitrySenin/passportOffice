@@ -16,6 +16,7 @@
 			authInfo.isAuthenticated = false;
 			authInfo.userName = '';
 			authInfo.token = undefined;
+			authInfo.isAdmin = false;
 			
 			authInfo.Set = function(isAuthenticated, userName, token) {
 				authInfo.isAuthenticated = isAuthenticated;
@@ -28,7 +29,12 @@
 			 */
 			authInfo.Reset = function() {
 				authInfo.Set(false, '', undefined);
+				authInfo.SetAdminMode(false);
 			}
+
+			authInfo.SetAdminMode = function(adminMode) {
+				authInfo.isAdmin = adminMode;
+			};
 		}
 
 		var authInfo = new AuthInfo();
@@ -44,8 +50,12 @@
 			get AccessToken() {
 				return authInfo.token;
 			},
+			get IsAdmin() {
+				return authInfo.isAdmin;
+			},
 			SetInfo : authInfo.Set,
-			ResetInfo : authInfo.Reset
+			ResetInfo : authInfo.Reset,
+			SetAdminMode : authInfo.SetAdminMode
 		};
 	}
 })();
