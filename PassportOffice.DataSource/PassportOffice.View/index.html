@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Passport Office</title>
+	<meta charset='utf-8'>
+
+	<link rel="stylesheet" type="text/css" href="app/lib/css/bootstrap.min.css">
+
+	<script type="text/javascript" src="app/lib/jquery-2.2.0.min.js"></script>
+	<script src="app/lib/angular.min.js"></script>
+	<script type="text/javascript" src="app/lib/ui-bootstrap-tpls-1.1.2.min.js"></script>
+	<script type="text/javascript" src="app/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="app/lib/ng-infinite-scroll.min.js"></script>
+	<script type="text/javascript" src="app/lib/spin.min.js"></script>
+	<script type="text/javascript" src="app/lib/angular-spinner.min.js"></script>
+
+	<script type="text/javascript" src="app/app.module.js"></script>
+	<script type="text/javascript" src="app/URL/URLService.js"></script>
+	<script type="text/javascript" src="app/PersonalData/PersonalDataFactory.js"></script>
+	<script type="text/javascript" src="app/PersonalData/PersonalInfoCtrl.js"></script>
+	<script type="text/javascript" src="app/Search/SearchCtrl.js"></script>
+	<script type="text/javascript" src="app/Users/AuthInterceptorService.js"></script>
+	<script type="text/javascript" src="app/Users/AuthenticationInfoStorage.js"></script>
+	<script type="text/javascript" src="app/Users/AuthService.js"></script>
+	<script type="text/javascript" src="app/Users/UsersCtrl.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="app/styles/main.css">
+	<link rel="stylesheet" type="text/css" href="app/styles/login.css">
+</head>
+<body>
+	<div ng-app="main">
+		<header id="site-header">
+			<span id="header-lbl">Passport office</span>
+			<div ng-controller="UsersCtrl as users">
+				<div id="user-container">
+					<div id="login" class="dropdown">
+						<input type="button" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" value="Sign in" ng-hide='users.IsAuthenticated'>
+						<input type="button" class="btn btn-primary" value="Sign out" ng-show='users.IsAuthenticated' ng-click='users.Logout()'>
+			            <div class="dropdown-menu">
+			              	<form id="formLogin" class="form container-fluid">
+				                <br>
+				                <div class="form-group">
+				                	<input class="form-control" ng-model="users.username" placeholder="Username" required="" type="text">
+				                </div>
+				                <div class="form-group">	
+				                	<input class="form-control" ng-model="users.password" placeholder="Password" type="password">
+				                </div>  
+				                <button type="button" id="btnLogin" class="btn btn-block" ng-click="users.Login()">Login</button>
+				                <div ng-hide="users.IsAuthSuccess">
+				                	<hr>
+				                	<label>Errors:</label>
+				                	<br>
+				                	<span class="error">Combination of login and password is incorrect.</span>
+				                </div>
+			              	</form>
+			            </div>
+		            </div>
+				</div>
+			</div>
+		</header>
+		<div ng-controller="SearchCtrl as search">
+			<div id="search-panel">
+				<label id="panel-label">Selection criteria</label>
+				<div class="search-option">
+					<label for="LastName">Last name</label>
+					<input name="LastName" type="text" ng-model="search.SearchingOptions.LastName">
+				</div>
+				<div class="search-option">
+					<label for="FirstName">First name</label>
+					<input name="FirstName" type="text" ng-model="search.SearchingOptions.FirstName">
+				</div>
+				<div class="search-option">
+					<label for="MiddleName">Middle name</label>
+					<input name="MiddleName" type="text" ng-model="search.SearchingOptions.MiddleName">
+				</div>
+				<div class="search-option">
+					<label for="BirthdayDate">Birthday date</label>
+					<input name="BirthdayDate" type="text" ng-model="search.SearchingOptions.BirthdayDate" uib-datepicker-popup="yyyy-MM-dd" is-open="search.dateprickerPopup.opened" close-text="Close" ng-click="search.openDatepickerPopup()">
+				</div>
+				<div class="search-option">
+					<label for="PassportSeries">Passport series</label>
+					<input name="PassportSeries" type="text" ng-model="search.SearchingOptions.PassportSeries">
+				</div>
+				<div class="search-option">
+					<label for="PassportNumber">Passport number</label>
+					<input name="PassportNumber" type="text" ng-model="search.SearchingOptions.PassportNumber">
+				</div>
+				<input type="button" id="start-search" class="btn" value="Search" ng-click="search.StartSearch()">
+				<div class="">
+					<label for="Order">Order</label>
+					<input name="Order" type="checkbox" class="checkbox-inline" ng-model="search.NeedSort">
+				</div>
+			</div>
+		</div>
+		<div ng-controller="PersonalInfoCtrl as personalInfo">
+			<span us-spinner="{radius:30, width:8, length: 16}" spinner-key="{{personalInfo.SpinnerKey}}"></span>
+			<table id="personalInfoContainer">
+				<thead>
+					<tr>
+						<th>Last name</th>
+						<th>First name</th>
+						<th>Middle name</th>
+						<th>Date of birthday</th>
+						<th>Series of passport</th>
+						<th>Number of passport</th>
+						<th>Date of issue passport</th>
+						<th>Address</th>
+					</tr>
+				</thead>
+				<tbody infinite-scroll="personalInfo.InfiniteScroll.nextPage()" infinite-scroll-disabled='personalInfo.InfiniteScroll.inLoading'>
+					<tr ng-repeat="personalinfo in personalInfo.PersonalInfo">
+						<td>{{personalinfo.LastName}}</td>
+						<td>{{personalinfo.FirstName}}</td>
+						<td>{{personalinfo.MiddleName}}</td>
+						<td>{{personalinfo.BirthdayDate.toDateString()}}</td>
+						<td>{{personalinfo.PassportSeries}}</td>
+						<td>{{personalinfo.PassportNumber}}</td>
+						<td>{{personalinfo.PassportIssueDate.toDateString()}}</td>
+						<td>{{personalinfo.Address}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

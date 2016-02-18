@@ -1,0 +1,9 @@
+#user-container {
+	position: absolute;
+	top: 5px;
+	right: 20px;
+}
+
+#user-container .dropdown-menu {
+	left: -150%;
+}
