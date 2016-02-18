@@ -38,6 +38,14 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -54,12 +62,24 @@
     <Compile Include="Migrations\201602011330487_AddPersonalInfo.Designer.cs">
       <DependentUpon>201602011330487_AddPersonalInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602111124490_ImplementAuth.cs" />
+    <Compile Include="Migrations\201602111124490_ImplementAuth.Designer.cs">
+      <DependentUpon>201602111124490_ImplementAuth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602151347127_PersonalInfoRestrictions.cs" />
+    <Compile Include="Migrations\201602151347127_PersonalInfoRestrictions.Designer.cs">
+      <DependentUpon>201602151347127_PersonalInfoRestrictions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\PersonInfo.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWork\Repositories\PersonalInfo\IPersonalInfoRepositiry.cs" />
-    <Compile Include="UnitOfWork\Repositories\PersonalInfo\PersonalInfoRepository.cs" />
-    <Compile Include="UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="Searching\PersonalInfoSearchingOptions.cs" />
+    <Compile Include="DataAccess\Repositories\PersonalInfo\IPersonalInfoRepositiry.cs" />
+    <Compile Include="DataAccess\Repositories\PersonalInfo\PersonalInfoRepository.cs" />
+    <Compile Include="DataAccess\Repositories\Users\IUsersRepository.cs" />
+    <Compile Include="DataAccess\Repositories\Users\UsersRepository.cs" />
+    <Compile Include="DataAccess\RepositoriesUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -69,7 +89,14 @@
     <EmbeddedResource Include="Migrations\201602011330487_AddPersonalInfo.resx">
       <DependentUpon>201602011330487_AddPersonalInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602111124490_ImplementAuth.resx">
+      <DependentUpon>201602111124490_ImplementAuth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602151347127_PersonalInfoRestrictions.resx">
+      <DependentUpon>201602151347127_PersonalInfoRestrictions.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
