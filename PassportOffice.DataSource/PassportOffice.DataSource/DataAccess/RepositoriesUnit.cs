@@ -1,15 +1,16 @@
-﻿namespace PassportOffice.DataSource.UnitOfWork
+﻿namespace PassportOffice.DataSource.DataAccess
 {
     using System;
 
     using PassportOffice.DataSource.Context;
-    using PassportOffice.DataSource.UnitOfWork.Repositories.PersonalInfo;
+    using PassportOffice.DataSource.DataAccess.Repositories.PersonalInfo;
+    using PassportOffice.DataSource.DataAccess.Repositories.Users;
 
     /// <summary>
     /// Container of repositories working with database.
     /// It guarantees that all repositories will work with one context of database.
     /// </summary>
-    public class UnitOfWork : IDisposable
+    public class RepositoriesUnit : IDisposable
     {
         /// <summary>
         /// Flag which identifies that object was already disposed.
@@ -22,12 +23,17 @@
         private PassportOfficeContext passportOfficeContext = new PassportOfficeContext();
 
         /// <summary>
-        /// Repository with personal infornation.
+        /// Repository with personal information.
         /// </summary>
         private IPersonalInfoRepositiry personalInfoRepo;
 
         /// <summary>
-        /// Get/set repository with personal data.
+        /// Repository with information about users.
+        /// </summary>
+        private IUsersRepository usersRepository;
+
+        /// <summary>
+        /// Gets/sets repository with personal data.
         /// </summary>
         public IPersonalInfoRepositiry PersonalInfoRepository
         {
@@ -39,6 +45,22 @@
                 }
 
                 return this.personalInfoRepo;
+            }
+        }
+
+        /// <summary>
+        /// Gets/sets respoistory with users information.
+        /// </summary>
+        public IUsersRepository UsersRepository
+        {
+            get
+            {
+                if (this.usersRepository == null)
+                {
+                    this.usersRepository = new UsersRepository(this.passportOfficeContext);
+                }
+
+                return this.usersRepository;
             }
         }
 
