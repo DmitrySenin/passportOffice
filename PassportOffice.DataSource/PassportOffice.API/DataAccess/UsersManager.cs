@@ -31,5 +31,15 @@
         {
             return this.reposCollection.UsersRepository.DoesExist(new User { UserName = username, Password = password});
         }
+
+        /// <summary>
+        /// Recognizes administrator by login.
+        /// </summary>
+        /// <param name="userName">Registered name of user.</param>
+        /// <returns>Flag which identifies that user is administrator.</returns>
+        public bool IsAdmin(string userName)
+        {
+            return this.reposCollection.UsersRepository.IsAdmin(userName);
+        }
     }
 }
