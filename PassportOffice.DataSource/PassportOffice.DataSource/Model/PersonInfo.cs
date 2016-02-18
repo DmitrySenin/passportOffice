@@ -2,6 +2,8 @@
 {
     using System;
 
+    using System.ComponentModel.DataAnnotations;
+
     /// <summary>
     /// Represents information about person.
     /// </summary>
@@ -15,16 +17,19 @@
         /// <summary>
         /// First name of person.
         /// </summary>
+        [StringLength(200, MinimumLength = 1)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Last name of person.
         /// </summary>
+        [StringLength(200, MinimumLength = 1)]
         public string LastName { get; set; }
-        
+
         /// <summary>
         /// Middle name of person.
         /// </summary>
+        [StringLength(200, MinimumLength = 1)]
         public string MiddleName { get; set; }
 
         /// <summary>
@@ -35,16 +40,19 @@
         /// <summary>
         /// Residence address of person.
         /// </summary>
+        [StringLength(400, MinimumLength = 0)]
         public string Address { get; set; }
-        
+
         /// <summary>
         /// Series of person's passport.
         /// </summary>
+        [StringLength(15, MinimumLength = 1)]
         public string PassportSeries { get; set; }
 
         /// <summary>
         /// Number of person's passport.
         /// </summary>
+        [StringLength(15, MinimumLength = 1)]
         public string PassportNumber { get; set; }
 
         /// <summary>

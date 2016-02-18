@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Passport Office</title>
+	<meta charset='utf-8'>
+
+	<link rel="stylesheet" type="text/css" href="app/lib/css/bootstrap.min.css">
+
+	<script type="text/javascript" src="app/lib/jquery-2.2.0.min.js"></script>
+	<script src="app/lib/angular.min.js"></script>
+	<script type="text/javascript" src="app/lib/ui-bootstrap-tpls-1.1.2.min.js"></script>
+	<script type="text/javascript" src="app/lib/ng-infinite-scroll.min.js"></script>
+
+	<script type="text/javascript" src="app/app.module.js"></script>
+	<script type="text/javascript" src="app/URL/URLService.js"></script>
+	<script type="text/javascript" src="app/PersonalData/PersonalDataFactory.js"></script>
+	<script type="text/javascript" src="app/PersonalData/PersonalInfoCtrl.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="app/styles/main.css">
+</head>
+<body>
+	<div ng-app="main">
+		<div ng-controller="PersonalInfoCtrl as personalInfo">
+			<table id="personalInfoContainer">
+				<thead>
+					<tr>
+						<th>Last name</th>
+						<th>First name</th>
+						<th>Middle name</th>
+						<th>Date of birthday</th>
+						<th>Series of passport</th>
+						<th>Number of passport</th>
+						<th>Date of issue passport</th>
+						<th>Address</th>
+					</tr>
+				</thead>
+				<tbody id="personalInfoSearchOptions">
+					<tr>
+						<td><input type="text" ng-model="personalInfo.SearchingOptions.LastName" ng-change="personalInfo.Search.Reload()"></td>
+						<td><input type="text" ng-model="personalInfo.SearchingOptions.FirstName" ng-change="personalInfo.Search.Reload()"></td>
+						<td><input type="text" ng-model="personalInfo.SearchingOptions.MiddleName" ng-change="personalInfo.Search.Reload()"></td>
+						<td>
+							<input type="text" ng-model="personalInfo.SearchingOptions.BirthdayDate" uib-datepicker-popup="yyyy-MM-dd" is-open="personalInfo.dateprickerPopup.opened" close-text="Close" ng-click="personalInfo.openDatepickerPopup()" ng-change="personalInfo.Search.Reload()"/>
+						</td>
+						<td><input type="text" ng-model="personalInfo.SearchingOptions.PassportSeries" ng-change="personalInfo.Search.Reload()"></td>
+						<td><input type="text" ng-model="personalInfo.SearchingOptions.PassportNumber" ng-change="personalInfo.Search.Reload()"></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+				<tbody infinite-scroll="personalInfo.InfiniteScroll.nextPage()" infinite-scroll-disabled='personalInfo.InfiniteScroll.inLoading'>
+					<tr ng-repeat="personalinfo in personalInfo.PersonalInfo">
+						<td>{{personalinfo.LastName}}</td>
+						<td>{{personalinfo.FirstName}}</td>
+						<td>{{personalinfo.MiddleName}}</td>
+						<td>{{personalinfo.BirthdayDate.toDateString()}}</td>
+						<td>{{personalinfo.PassportSeries}}</td>
+						<td>{{personalinfo.PassportNumber}}</td>
+						<td>{{personalinfo.PassportIssueDate.toDateString()}}</td>
+						<td>{{personalinfo.Address}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
