@@ -35,5 +35,18 @@
         {
             return personalInfoManager.GetPagedList(pageSize, pageNumber, searchOptions, fullSort);
         }
+
+        /// <summary>
+        /// Remove all personal data.
+        /// </summary>
+        /// <returns>Result of execution of removing.</returns>
+        [Authorize]
+        [Route("")]
+        [HttpDelete]
+        public IHttpActionResult RemoveAll()
+        {
+            this.personalInfoManager.RemoveAll();
+            return this.Ok();
+        }
     }
 }
