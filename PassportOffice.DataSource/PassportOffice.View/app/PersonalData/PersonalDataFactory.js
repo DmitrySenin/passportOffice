@@ -35,5 +35,13 @@
 		function Load(pageSize, pageNumber, fullSort, searchingOptions) {
 			return $http.get(URLService.BuildPersonalInfoGetURL(pageSize, pageNumber, fullSort), { params : searchingOptions });
 		};
+
+		/**
+		 * Carries out request to delete all personal data.
+		 * @return {Object} Promise which represents flow of request.
+		 */
+		function RemoveAll() {
+			return $http.delete(URLService.BuildPersonalInfoRemoveAllURL());
+		}
 	};
 })();
