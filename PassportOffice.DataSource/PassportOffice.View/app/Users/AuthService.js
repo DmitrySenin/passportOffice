@@ -44,6 +44,31 @@
 		};
 
 		/**
+		 * Sends request to verify current user for admninistrator and puts result to storage.
+		 * 
+		 * @return {Object} Promise that represents flow of request.
+		 */
+		function isAdmin() {
+			
+			if(AuthenticationInfoStorage.IsAuthenticated) {
+				
+				var deferred = $q.defer();
+
+				$http.get(URLService.BuildIsAdminURL()).success(function(isAdmin) {
+					AuthenticationInfoStorage.SetAdminMode(isAdmin);
+					deferred.resolve();
+				}).error(function(error) {
+					deferred.reject();
+				});
+
+				return deferred.promise;
+
+			} else {
+				return $q.reject("User is not authenticated yet.");
+			}
+		}
+
+		/**
 		 * Sign out current user.
 		 */
 		function logout() {
@@ -53,7 +78,8 @@
 		// Factory desciption.
 		return {
 			Login: login,
-			Logout: logout
+			Logout: logout,
+			IsAdmin : isAdmin
 		};
 	}
 
