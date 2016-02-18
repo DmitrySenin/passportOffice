@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\PassportOfficeContext.cs" />
+    <Compile Include="DataAccess\Repositories\Roles\IRolesRepository.cs" />
     <Compile Include="Migrations\201602011330487_AddPersonalInfo.cs" />
     <Compile Include="Migrations\201602011330487_AddPersonalInfo.Designer.cs">
       <DependentUpon>201602011330487_AddPersonalInfo.cs</DependentUpon>
