@@ -15,6 +15,14 @@
 		var BASE_URL = "http://localhost:57336/";
 
 		/**
+		 * Create URL to controller of personal information.
+		 * @return {String} URL to make requests to manage persoanal data.
+		 */
+		function BuildPersonalInfoURL() {
+			return BASE_URL + "personalinfo/";
+		}
+
+		/**
 		 * Create URL to API to getting passport data.
 		 * @param {Numeric} pageSize Amount of personal information records per one page.
 		 * @param {Numeric} pagenumber Number of requested page of date.
@@ -22,7 +30,7 @@
 		 * @return {string} URL for requesting personal data from server. 
 		 */
 		this.BuildPersonalInfoGetURL = function(pageSize, pageNumber, fullSort) {
-			return BASE_URL + "personalinfo/" + pageSize + "/" + pageNumber + "/" + fullSort;
+			return BuildPersonalInfoURL() + pageSize + "/" + pageNumber + "/" + fullSort;
 		}
 
 		/**
