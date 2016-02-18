@@ -32,5 +32,12 @@
 		this.BuildLoginURL = function() {
 			return BASE_URL + 'token';
 		}
+
+		/**
+		 * Create URL to API to checl that user is administrator.
+		 */
+		this.BuildIsAdminURL = function() {
+			return BASE_URL + "users/isadmin"
+		}
 	}
 })();
