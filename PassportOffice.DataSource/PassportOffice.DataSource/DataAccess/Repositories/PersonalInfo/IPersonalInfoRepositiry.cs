@@ -44,6 +44,11 @@
         PersonInfo GetById(int ID);
 
         /// <summary>
+        /// Removes all data from storage.
+        /// </summary>
+        void RemoveAll();
+
+        /// <summary>
         /// Saves changes of repository.
         /// </summary>
         void Save();

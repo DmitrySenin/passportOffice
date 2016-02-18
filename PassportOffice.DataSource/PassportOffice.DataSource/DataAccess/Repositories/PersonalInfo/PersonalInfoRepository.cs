@@ -14,6 +14,11 @@
     public class PersonalInfoRepository : IPersonalInfoRepositiry
     {
         /// <summary>
+        /// Name of table in database which is used to store personal data.
+        /// </summary>
+        private static readonly string TargetTableName = "PersonInfo";
+
+        /// <summary>
         /// Current context of database.
         /// </summary>
         private PassportOfficeContext passportOfficeContext;
@@ -80,6 +85,14 @@
         public PersonInfo GetById(int id)
         {
             return this.passportOfficeContext.Persons.FirstOrDefault(p => p.ID == id);
+        }
+
+        /// <summary>
+        /// Clear all personal information records from database.
+        /// </summary>
+        public void RemoveAll()
+        {
+            this.passportOfficeContext.Database.ExecuteSqlCommand("delete from " + TargetTableName);
         }
 
         /// <summary>
