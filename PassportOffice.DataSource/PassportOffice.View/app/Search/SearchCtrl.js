@@ -5,12 +5,12 @@
 		.module('main')
 		.controller('SearchCtrl', SearchCtrl);
 
-	SearchCtrl.$inject = ['PersonalInfoLoader', 'EventNames', '$rootScope'];
+	SearchCtrl.$inject = ['PersonalInfoService', 'EventNames', '$rootScope'];
 
-	function SearchCtrl(PersonalInfoLoader, EventNames, $rootScope) {
+	function SearchCtrl(PersonalInfoService, EventNames, $rootScope) {
 		var vm = this;
 
-		vm.SearchingOptions = new PersonalInfoLoader.SearchingOptions();
+		vm.SearchingOptions = new PersonalInfoService.SearchingOptions();
 		vm.NeedSort = false;
 
 		// Represents datepicker's state.

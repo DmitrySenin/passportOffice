@@ -1,11 +1,11 @@
 ;(function() {
 	angular
 		.module('main')
-		.factory("PersonalInfoLoader", PersonalInfoLoader);
+		.factory("PersonalInfoService", PersonalInfoService);
 
-	PersonalInfoLoader.$inject = ['$http', 'URLService'];
+	PersonalInfoService.$inject = ['$http', 'URLService'];
 
-	function PersonalInfoLoader($http, URLService) {
+	function PersonalInfoService($http, URLService) {
 
 		return {
 			SearchingOptions : SearchingOptions,

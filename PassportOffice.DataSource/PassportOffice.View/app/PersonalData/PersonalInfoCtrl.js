@@ -5,16 +5,16 @@
 		.module('main')
 		.controller("PersonalInfoCtrl", PersonalInfoCtrl);
 
-	PersonalInfoCtrl.$inject = ['PersonalInfoLoader', 'EventNames', '$rootScope', 'usSpinnerService'];
+	PersonalInfoCtrl.$inject = ['PersonalInfoService', 'EventNames', '$rootScope', 'usSpinnerService'];
 
-	function PersonalInfoCtrl(PersonalInfoLoader, EventNames, $rootScope, usSpinnerService) {
+	function PersonalInfoCtrl(PersonalInfoService, EventNames, $rootScope, usSpinnerService) {
 
 		var vm = this,
 			currentPage = 1,
 			pageSize = 20,
 			allDataLoaded = false,
 			fullSort = false,
-			searchingOptions = new PersonalInfoLoader.SearchingOptions();
+			searchingOptions = new PersonalInfoService.SearchingOptions();
 
 		vm.PersonalInfo = [];
 		vm.SpinnerKey = 'LoadingSpinner';
@@ -24,7 +24,7 @@
 		 */
 		vm.getInfo = function() {
 			startSpinner();
-			PersonalInfoLoader.Load(pageSize, currentPage, fullSort, searchingOptions)
+			PersonalInfoService.Load(pageSize, currentPage, fullSort, searchingOptions)
 				.success(function(data) {
 					// Handle gathered data.
 					data.map(function(item, index, arr) {
