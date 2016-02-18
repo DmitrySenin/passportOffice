@@ -6,6 +6,7 @@
     using Microsoft.Owin.Security.OAuth;
 
     using PassportOffice.API.DataAccess;
+    using PassportOffice.API.Utility;
 
     public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
@@ -33,7 +34,7 @@
             if (userManager.DoesExist(context.UserName, context.Password))
             {
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-                identity.AddClaim(new Claim("username", context.UserName));
+                identity.AddClaim(ClaimsUtils.CreateUserNameClaim(context.UserName));
 
                 context.Validated(identity);
             }
