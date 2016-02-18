@@ -17,9 +17,11 @@
 		function AuthInfo() {
 			this.isAuthenticated = false;
 			this.userName = '';
-			this.Set = function(isAuthenticated, userName) {
+			this.token = undefined;
+			this.Set = function(isAuthenticated, userName, token) {
 				this.isAuthenticated = isAuthenticated;
 				this.userName = userName; 
+				this.token = token;
 			};
 		}
 
@@ -28,7 +30,7 @@
 		 * @param {Object} authInfo Object represnts authentication state.
 		 */
 		AuthInfo.Reset = function(authInfo) {
-			authInfo.Set(false, '');
+			authInfo.Set(false, '', undefined);
 		};
 
 		var authInfo = new AuthInfo();
@@ -53,7 +55,7 @@
 
 			$http.post(URLService.BuildLoginURL(), data, config).success(function(response){
 
-				authInfo.Set(true, username);
+				authInfo.Set(true, username, response.access_token);
 
 				deferred.resolve(response);
 
@@ -81,6 +83,9 @@
 			},
 			get UserName() {
 				return authInfo.userName;
+			},
+			get AccessToken() {
+				return authInfo.token;
 			},
 			Login: login,
 			Logout: logout
