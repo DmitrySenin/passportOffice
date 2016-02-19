@@ -86,6 +86,14 @@
 			vm.ShowAdminPanel = true;
 		});
 
+		/**
+		 * Handles user logout.
+		 * @param  {Object} event Description of handled event.
+		 */
+		$rootScope.$on(EventNames.Logout, function(event) {
+			vm.ShowAdminPanel = false;
+		});
+
 		function startSpinner() {
 			usSpinnerService.spin(vm.SpinnerKey);
 		}
