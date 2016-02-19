@@ -64,6 +64,17 @@
 		};
 
 		/**
+		 * Send request to remove all personal data and clear local storage.
+		 */
+		vm.RemoveAllPersonalData = function() {
+			PersonalInfoService.RemoveAll().success(function() {
+				vm.PersonalInfo = [];
+			}).error(function(error) {
+				alert('Operation failed.');
+			});
+		}
+
+		/**
 		 * Handles of changing searching parameters.
 		 * @param  {Object} event Description of handled event.
 		 * @param  {Object} SearchingOptions Object with criteria of data selection.
