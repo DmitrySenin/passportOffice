@@ -3,7 +3,8 @@
 		.module('main', ['ui.bootstrap', 'infinite-scroll', 'angularSpinner'])
 		.constant('EventNames', {
 			'Search' : 'search',
-			'AuthAdmin' : 'authadmin'
+			'AuthAdmin' : 'authadmin',
+			'Logout' : 'logout'
 		})
 		.config(function($httpProvider) {
 			$httpProvider.interceptors.push('AuthInterceptorService');

@@ -41,6 +41,7 @@
 		vm.Logout = function() {
 			AuthService.Logout();
 			catchAuthenticationFlag(vm);
+			alertAboutLogout();
 		};
 
 		/**
@@ -81,6 +82,13 @@
 		 */
 		function alertAboutAdmin() {
 			$rootScope.$emit(EventNames.AuthAdmin);
+		}
+
+		/**
+		 * Send notification about user logout.
+		 */
+		function alertAboutLogout() {
+			$rootScope.$emit(EventNames.Logout);
 		}
 	}
 
