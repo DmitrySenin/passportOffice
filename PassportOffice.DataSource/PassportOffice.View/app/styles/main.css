@@ -38,8 +38,8 @@ header#site-header {
 
 #search-panel {
 	display: block;
-	width: 1000px;
-	margin: 30px auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
 	padding: 10px;
 	border: 1px solid #777;
 	border-radius: 5px;
