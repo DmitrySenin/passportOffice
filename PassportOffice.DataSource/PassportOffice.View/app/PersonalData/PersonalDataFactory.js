@@ -9,7 +9,8 @@
 
 		return {
 			SearchingOptions : SearchingOptions,
-			Load : Load
+			Load : Load,
+			RemoveAll : RemoveAll
 		};
 		
 		/**
