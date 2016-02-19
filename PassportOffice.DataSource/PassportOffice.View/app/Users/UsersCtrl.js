@@ -5,9 +5,9 @@
 		.module('main')
 		.controller('UsersCtrl', UsersCtrl);
 
-	UsersCtrl.$inject = ['AuthService', 'AuthenticationInfoStorage'];
+	UsersCtrl.$inject = ['AuthService', 'AuthenticationInfoStorage', 'EventNames', '$rootScope'];
 
-	function UsersCtrl(AuthService, AuthenticationInfoStorage) {
+	function UsersCtrl(AuthService, AuthenticationInfoStorage, EventNames, $rootScope) {
 		var vm = this;
 
 		catchAuthenticationFlag(vm);
@@ -22,6 +22,12 @@
 				catchAuthenticationFlag(vm);
 				hideLoginForm();
 				setAuthSuccessFlag(vm, true);
+
+				AuthService.IsAdmin().then(function() {
+					if(AuthenticationInfoStorage.IsAdmin) {
+						alertAboutAdmin();
+					}
+				});
 			}, 
 			function(error) {
 				catchAuthenticationFlag(vm);
@@ -68,6 +74,13 @@
 		 */	
 		function setAuthSuccessFlag(scope, value) {
 			scope.IsAuthSuccess = !!value;
+		}
+
+		/**
+		 * Send notification about admin authentication.
+		 */
+		function alertAboutAdmin() {
+			$rootScope.$emit(EventNames.AuthAdmin);
 		}
 	}
 
