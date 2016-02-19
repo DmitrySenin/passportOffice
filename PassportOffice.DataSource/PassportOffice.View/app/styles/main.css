@@ -57,6 +57,14 @@ header#site-header {
 }
 
 
+/*Admin panel*/
+
+#adminPanel {
+	width: 1000px;
+	margin: 10px auto;
+	padding: 10px;
+}
+
 /*Personal data container*/
 
 /*Common styles of personal data container.*/
