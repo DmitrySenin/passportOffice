@@ -94,7 +94,7 @@
 		</div>
 		<div ng-controller="PersonalInfoCtrl as personalInfo">
 			<span us-spinner="{radius:30, width:8, length: 16}" spinner-key="{{personalInfo.SpinnerKey}}"></span>
-			<div id='adminPanel' ng-show='personalInfo.ShowAdminPanel'>
+			<div id='adminPanel'  class='content-mid content-width' ng-show='personalInfo.ShowAdminPanel'>
 				<a href="#" class="btn btn-primary">Clear</a>
 			</div>
 			<table id="personalInfoContainer">
