@@ -18,6 +18,7 @@
 
 		vm.PersonalInfo = [];
 		vm.SpinnerKey = 'LoadingSpinner';
+		vm.ShowAdminPanel = false;
 
 		/**
 		 * Load personal data and set value of context variables.
@@ -75,6 +76,14 @@
 			allDataLoaded = false;
 			vm.PersonalInfo = [];
 			vm.getInfo();
+		});
+
+		/**
+		 * Handles administrator authentication.
+		 * @param  {Object} event Description of handled event.
+		 */
+		$rootScope.$on(EventNames.AuthAdmin, function(event) {
+			vm.ShowAdminPanel = true;
 		});
 
 		function startSpinner() {
