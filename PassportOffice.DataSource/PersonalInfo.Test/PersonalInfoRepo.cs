@@ -166,28 +166,43 @@
         }
 
         /// <summary>
-        /// Check that each elemnent of collection satisfies searching options.
+        /// Check that each element of collection satisfies searching options, ordered and amount of elements is not more than requested.
         /// </summary>
         [TestCase]
         public void Should_SatisfySearchingCriteriaAndOrderedAndPaged()
         {
-            int pageSize = 10;
-            int pageNumber = 1;
+            // Arrange
+            int pageSize = 1;
+            int pageNumber = 2;
 
-            var repo = new PersonalInfoRepository(passportOfficeContext);
+            var personalData = new List<PersonInfo>()
+            {
+                new PersonInfo { ID = 1, LastName = "C", FirstName = "C", MiddleName = "C", BirthdayDate = new DateTime(3, 1, 1), PassportSeries = "3333", PassportNumber = "333333", PassportIssueDate = new DateTime(21, 1, 1), Address = "C street" },
+                new PersonInfo { ID = 4, LastName = "A", FirstName = "A", MiddleName = "A", BirthdayDate = new DateTime(1, 1, 1), PassportSeries = "1111", PassportNumber = "111111", PassportIssueDate = new DateTime(19, 1, 1), Address = "A street" },
+                new PersonInfo { ID = 2, LastName = "B", FirstName = "B", MiddleName = "B", BirthdayDate = new DateTime(2, 1, 1), PassportSeries = "2222", PassportNumber = "222222", PassportIssueDate = new DateTime(20, 1, 1), Address = "B street" },
+                new PersonInfo { ID = 3, LastName = "C", FirstName = "C", MiddleName = "C", BirthdayDate = new DateTime(2, 1, 1), PassportSeries = "2222", PassportNumber = "222221", PassportIssueDate = new DateTime(20, 1, 1), Address = "C street" },
+            };
 
-            var searchingOptions = this.createSearchOptions(this.personInfo);
+            var repo = this.createPersonaInfoRepo(personalData);
+
+            var searchingOptions = new PersonalInfoSearchingOptions();
+            searchingOptions.FirstName = "C";
+            searchingOptions.LastName = "C";
+
+            var excepectedCollection = new List<PersonInfo>()
+            {
+                personalData[0]
+            };
+            
+            // Act
             var persons = repo.GetPage(pageSize, pageNumber, searchingOptions, true);
 
-            var testPersonalData = this.sortPersonalInfo(this.personInfo);
-            testPersonalData = this.searchPersonalData(testPersonalData, searchingOptions).ToList();
-            testPersonalData = this.getPageOfPersonalData(testPersonalData, pageSize, pageNumber).ToList();
-
+            // Assertions
             // Amount of records is correct.
             Assert.LessOrEqual(persons.Count(), pageSize);
             
             // Check that collection consist of same element in same order.
-            CollectionAssert.AreEqual(testPersonalData, persons);
+            CollectionAssert.AreEqual(excepectedCollection, persons);
         }
 
         /// <summary>
