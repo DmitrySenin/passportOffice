@@ -107,12 +107,19 @@
         /// Check that collection will be empty if searching options contain non existing characteristic.
         /// </summary>
         [TestCase]
-        public void Should_CollectionIsEmpty()
+        public void Should_SearchedCollectionIsEmpty()
         {
-            var repo = new PersonalInfoRepository(passportOfficeContext);
-
-            // It's hack based on AutoFixture generating style.
-            // It add name of generated field to forward of string.
+            // Arrange
+            var personalData = new List<PersonInfo>()
+            {
+                new PersonInfo { ID = 1, LastName = "C", FirstName = "C", MiddleName = "C", BirthdayDate = new DateTime(3, 1, 1), PassportSeries = "3333", PassportNumber = "333333", PassportIssueDate = new DateTime(21, 1, 1), Address = "C street" },
+                new PersonInfo { ID = 4, LastName = "A", FirstName = "A", MiddleName = "A", BirthdayDate = new DateTime(1, 1, 1), PassportSeries = "1111", PassportNumber = "111111", PassportIssueDate = new DateTime(19, 1, 1), Address = "A street" },
+                new PersonInfo { ID = 2, LastName = "B", FirstName = "B", MiddleName = "B", BirthdayDate = new DateTime(2, 1, 1), PassportSeries = "2222", PassportNumber = "222222", PassportIssueDate = new DateTime(20, 1, 1), Address = "B street" },
+                new PersonInfo { ID = 3, LastName = "C", FirstName = "C", MiddleName = "C", BirthdayDate = new DateTime(2, 1, 1), PassportSeries = "2222", PassportNumber = "222221", PassportIssueDate = new DateTime(20, 1, 1), Address = "C street" },
+            };
+            var repo = this.createPersonaInfoRepo(personalData);
+            
+            // There are no records at repository which satisfy created searching options.
             var searchingOptions = new PersonalInfoSearchingOptions();
             searchingOptions.FirstName = "Mike";
             searchingOptions.LastName = "Shinoda";
