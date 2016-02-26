@@ -5,7 +5,6 @@
     using System.Data.Entity;
     using System.Linq;
 
-    using Ploeh.AutoFixture;
     using Moq;
     using NUnit.Framework;
 
@@ -20,32 +19,6 @@
     [TestFixture]
     public class PersonalInfoRepo
     {
-        /// <summary>
-        /// Represents test data.
-        /// </summary>
-        private List<PersonInfo> personInfo;
-
-        /// <summary>
-        /// Repersents set of database contains personal data;
-        /// </summary>
-        private DbSet<PersonInfo> personalInfoSet;
-
-        /// <summary>
-        /// Represents context which is used in repository.
-        /// </summary>
-        PassportOfficeContext passportOfficeContext;
-
-        /// <summary>
-        /// Initializing of necessary data.
-        /// </summary>
-        [SetUp]
-        public void Init()
-        {
-            this.personInfo = this.createPersonInfoContainer();
-            this.personalInfoSet = this.createPersonInfoDBContext(this.personInfo);
-            this.passportOfficeContext = this.createPassportOfficeContext(this.personalInfoSet);
-        }
-
         /// <summary>
         /// Check that repository returns all data.
         /// </summary>
@@ -206,23 +179,6 @@
         }
 
         /// <summary>
-        /// Generate test data and set it in container.
-        /// </summary>
-        private List<PersonInfo> createPersonInfoContainer()
-        {
-            Fixture fixture = new Fixture();
-            List<PersonInfo> personInfo = new List<PersonInfo>()
-            {
-                new PersonInfo { ID = 1, LastName = "C", FirstName = "C", MiddleName = "C", BirthdayDate = new DateTime(3, 1, 1), PassportSeries = "3333", PassportNumber = "333333", PassportIssueDate = new DateTime(21, 1, 1), Address = "C street" },
-                new PersonInfo { ID = 4, LastName = "A", FirstName = "A", MiddleName = "A", BirthdayDate = new DateTime(1, 1, 1), PassportSeries = "1111", PassportNumber = "111111", PassportIssueDate = new DateTime(19, 1, 1), Address = "A street" },
-                new PersonInfo { ID = 2, LastName = "B", FirstName = "B", MiddleName = "B", BirthdayDate = new DateTime(2, 1, 1), PassportSeries = "2222", PassportNumber = "222222", PassportIssueDate = new DateTime(20, 1, 1), Address = "B street" },
-                new PersonInfo { ID = 3, LastName = "C", FirstName = "C", MiddleName = "C", BirthdayDate = new DateTime(2, 1, 1), PassportSeries = "2222", PassportNumber = "222221", PassportIssueDate = new DateTime(20, 1, 1), Address = "C street" },
-            };
-
-            return personInfo;
-        }
-
-        /// <summary>
         /// Initializes database context using passed data.
         /// </summary>
         /// <param name="personInfo">Collection of personal data.</param>
@@ -264,116 +220,6 @@
             passportOfficeContext.Setup(c => c.Persons).Returns(personInfoSet);
             var personalInfoRepo = new PersonalInfoRepository(passportOfficeContext.Object);
             return personalInfoRepo;
-        }
-
-        /// <summary>
-        /// Sort collection of personal information.
-        /// </summary>
-        /// <param name="personInfo">List of personal information records.</param>
-        /// <returns>Sorted collection with personal data.</returns>
-        private List<PersonInfo> sortPersonalInfo(List<PersonInfo> personInfo)
-        {
-            return personInfo
-                        .OrderBy(p => p.LastName)
-                        .ThenBy(p => p.FirstName)
-                        .ThenBy(p => p.MiddleName)
-                        .ThenBy(p => p.BirthdayDate)
-                        .ThenBy(p => p.PassportSeries)
-                        .ThenBy(p => p.PassportNumber).ToList();
-        }
-
-        /// <summary>
-        /// Create random searching options based on passed collection of personal data.
-        /// </summary>
-        /// <param name="personInfo">Personal data which is used to generate options.</param>
-        /// <returns>Searching options which can be used to find at least one record from passed collection.</returns>
-        private PersonalInfoSearchingOptions createSearchOptions(IEnumerable<PersonInfo> personInfo)
-        {
-            Random rnd = new Random();
-            int index = rnd.Next(personInfo.Count());
-
-            string rndLastName = personInfo.ElementAt(index).LastName;
-
-            PersonalInfoSearchingOptions searchingOption = new PersonalInfoSearchingOptions();
-
-            // get random substring of random last name.
-            searchingOption.LastName = rndLastName.Substring(0, rnd.Next(rndLastName.Length));
-
-            return searchingOption;
-        }
-
-        /// <summary>
-        /// Execute seacrhing over collection of personal data using passed parameters.
-        /// </summary>
-        /// <param name="personalInfo">Collection to search over.</param>
-        /// <param name="searchingOptions">Searching criteria.</param>
-        /// <returns>Collection consists of elements which satisfy searching criteria.</returns>
-        private IEnumerable<PersonInfo> searchPersonalData(IEnumerable<PersonInfo> personalInfo, PersonalInfoSearchingOptions searchingOptions)
-        {
-            // Create temorary storage.
-            IEnumerable<PersonInfo> searchedPersonalData = personalInfo;
-
-            if (PersonalInfoSearchingOptions.CheckSearchingOptions(searchingOptions))
-            {
-                // Add searching by first name if need
-                if (searchingOptions.UseFirstName())
-                {
-                    searchedPersonalData = personalInfo.Where(p => p.FirstName.StartsWith(searchingOptions.FirstName));
-                }
-
-                // Add searching by last name if need
-                if (searchingOptions.UseLastName())
-                {
-                    searchedPersonalData = personalInfo.Where(p => p.LastName.StartsWith(searchingOptions.LastName));
-                }
-
-                // Add searching by middle name if need
-                if (searchingOptions.UseMiddleName())
-                {
-                    searchedPersonalData = personalInfo.Where(p => p.MiddleName.StartsWith(searchingOptions.MiddleName));
-                }
-
-                // Add searching by series of passport if need
-                if (searchingOptions.UsePassportSeries())
-                {
-                    searchedPersonalData = personalInfo.Where(p => p.PassportSeries.StartsWith(searchingOptions.PassportSeries));
-                }
-
-                // Add searching by number of passport if need
-                if (searchingOptions.UsePassportNumber())
-                {
-                    searchedPersonalData = personalInfo.Where(p => p.PassportNumber.StartsWith(searchingOptions.PassportNumber));
-                }
-
-                // Add searching by date of birthday if need
-                if (searchingOptions.UseBirthdayDate())
-                {
-                    searchedPersonalData = personalInfo.Where(p => p.BirthdayDate.Year == searchingOptions.BirthdayDate.Value.Year
-                                                            && p.BirthdayDate.Month == searchingOptions.BirthdayDate.Value.Month
-                                                            && p.BirthdayDate.Day == searchingOptions.BirthdayDate.Value.Day);
-                }
-            }
-
-            return searchedPersonalData.ToList();
-        }
-
-        /// <summary>
-        /// Paged collection of personal data.
-        /// </summary>
-        /// <param name="personInfo">Collection of persoanal data.</param>
-        /// <param name="pageSize">Amount records on one page.</param>
-        /// <param name="pageNumber">Number of requested page.</param>
-        /// <returns>Collection of personal information which placed on requested page.</returns>
-        private IEnumerable<PersonInfo> getPageOfPersonalData(IEnumerable<PersonInfo> personInfo, int pageSize, int pageNumber)
-        {
-            if (pageSize > 0 && pageNumber > 0)
-            {
-                return personInfo.Skip((pageNumber - 1) * pageSize).Take(pageSize);
-            }
-            else
-            {
-                return personInfo;
-            }
         }
     }
 }
