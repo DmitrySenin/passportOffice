@@ -185,6 +185,20 @@
         }
 
         /// <summary>
+        /// Creates repository based on collection with personal data.
+        /// </summary>
+        /// <param name="personInfo">Collection of personal information.</param>
+        /// <returns>Repository which manipulates personal data and contains passed data.</returns>
+        private PersonalInfoRepository createPersonaInfoRepo(List<PersonInfo> personInfo)
+        {
+            var personInfoSet = this.createPersonInfoDBContext(personInfo);
+            var passportOfficeContext = new Mock<PassportOfficeContext>();
+            passportOfficeContext.Setup(c => c.Persons).Returns(personInfoSet);
+            var personalInfoRepo = new PersonalInfoRepository(passportOfficeContext.Object);
+            return personalInfoRepo;
+        }
+
+        /// <summary>
         /// Sort collection of personal information.
         /// </summary>
         /// <param name="personInfo">List of personal information records.</param>
