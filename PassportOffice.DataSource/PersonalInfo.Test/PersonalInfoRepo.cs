@@ -12,7 +12,7 @@
     using PassportOffice.DataSource.Context;
     using PassportOffice.DataSource.Model;
     using PassportOffice.DataSource.Searching;
-    using PassportOffice.DataSource.UnitOfWork.Repositories.PersonalInfo;
+    using PassportOffice.DataSource.DataAccess.Repositories.PersonalInfo;
 
     /// <summary>
     /// Testing repository of personal information.
