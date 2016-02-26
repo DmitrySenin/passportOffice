@@ -1,4 +1,4 @@
-﻿namespace PassportOffice.DataSource.UnitOfWork.Repositories.PersonalInfo
+﻿namespace PassportOffice.DataSource.DataAccess.Repositories.PersonalInfo
 {
     using System;
     using System.Collections.Generic;
@@ -13,6 +13,11 @@
     /// </summary>
     public class PersonalInfoRepository : IPersonalInfoRepositiry
     {
+        /// <summary>
+        /// Name of table in database which is used to store personal data.
+        /// </summary>
+        private static readonly string TargetTableName = "PersonInfo";
+
         /// <summary>
         /// Current context of database.
         /// </summary>
@@ -35,10 +40,11 @@
         /// <summary>
         /// Finds all data at database.
         /// </summary>
+        /// <param name="fullSort">Flag which identifies that records should be ordered by all discussed fields or only by ID.</param>
         /// <returns>All records from database.</returns>
-        public IEnumerable<PersonInfo> GetAll()
+        public IEnumerable<PersonInfo> GetAll(bool fullSort = false)
         {
-            List<PersonInfo> personalData = this.SortRecords(this.GetAllFromDB()).ToList();
+            List<PersonInfo> personalData = this.SortRecords(this.GetAllFromDB(), fullSort).ToList();
             return personalData;
         }
 
@@ -46,11 +52,12 @@
         /// Searches all data considering criteria.
         /// </summary>
         /// <param name="searchOptions">Searching criteria.</param>
+        /// <param name="fullSort">Flag which identifies that records should be ordered by all discussed fields or only by ID.</param>
         /// <returns>All records from database which satisfy restrictions.</returns>
-        public IEnumerable<PersonInfo> SearchAll(PersonalInfoSearchingOptions searchOptions)
+        public IEnumerable<PersonInfo> SearchAll(PersonalInfoSearchingOptions searchOptions, bool fullSort = false)
         {
             IQueryable<PersonInfo> dbPersonalInfo = this.GetAllFromDB();
-            dbPersonalInfo = this.SortRecords(this.SearchRecords(dbPersonalInfo, searchOptions));
+            dbPersonalInfo = this.SortRecords(this.SearchRecords(dbPersonalInfo, searchOptions), fullSort);
             return dbPersonalInfo.ToList();
         }
 
@@ -60,11 +67,12 @@
         /// <param name="pageSize">Size of page of information.</param>
         /// <param name="pageNumber">Number of page.</param>
         /// <param name="searchOptions">Criteria for selecting data.</param>
+        /// <param name="fullSort">Flag which identifies that records should be ordered by all discussed fields or only by ID.</param>
         /// <returns>All records located on requested page.</returns>
-        public IEnumerable<PersonInfo> GetPage(int pageSize, int pageNumber, PersonalInfoSearchingOptions searchOptions)
+        public IEnumerable<PersonInfo> GetPage(int pageSize, int pageNumber, PersonalInfoSearchingOptions searchOptions, bool fullSort = false)
         {
             IQueryable<PersonInfo> dbPersonalInfo = this.GetAllFromDB();
-            dbPersonalInfo = this.SortRecords(this.SearchRecords(dbPersonalInfo, searchOptions));
+            dbPersonalInfo = this.SortRecords(this.SearchRecords(dbPersonalInfo, searchOptions), fullSort);
             dbPersonalInfo = this.GetPagedRecords(dbPersonalInfo, pageSize, pageNumber);
             return dbPersonalInfo.ToList();
         }
@@ -77,6 +85,14 @@
         public PersonInfo GetById(int id)
         {
             return this.passportOfficeContext.Persons.FirstOrDefault(p => p.ID == id);
+        }
+
+        /// <summary>
+        /// Clear all personal information records from database.
+        /// </summary>
+        public void RemoveAll()
+        {
+            this.passportOfficeContext.Database.ExecuteSqlCommand("delete from " + TargetTableName);
         }
 
         /// <summary>
@@ -128,15 +144,23 @@
         /// middle name, date of birth, series of passport, number of passport.
         /// </summary>
         /// <param name="personalInfo">Data that should be sorted.</param>
+        /// <param name="fullSort">Flag which identifies that records should be ordered by all discussed fields or only by ID.</param>
         /// <returns>Sorted collection of personal data.</returns>
-        private IQueryable<PersonInfo> SortRecords(IQueryable<PersonInfo> personalInfo)
+        private IQueryable<PersonInfo> SortRecords(IQueryable<PersonInfo> personalInfo, bool fullSort = false)
         {
-            return personalInfo.OrderBy(p => p.LastName)
-                                .ThenBy(p => p.FirstName)
-                                .ThenBy(p => p.MiddleName)
-                                .ThenBy(p => p.BirthdayDate)
-                                .ThenBy(p => p.PassportSeries)
-                                .ThenBy(p => p.PassportNumber);
+            if (fullSort)
+            {
+                return personalInfo.OrderBy(p => p.LastName)
+                                    .ThenBy(p => p.FirstName)
+                                    .ThenBy(p => p.MiddleName)
+                                    .ThenBy(p => p.BirthdayDate)
+                                    .ThenBy(p => p.PassportSeries)
+                                    .ThenBy(p => p.PassportNumber);
+            }
+            else
+            {
+                return personalInfo.OrderBy(p => p.ID);
+            }
         }
 
         /// <summary>

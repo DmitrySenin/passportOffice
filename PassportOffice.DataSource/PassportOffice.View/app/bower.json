@@ -1,0 +1,28 @@
+{
+  "name": "PassportOffice",
+  "homepage": "https://github.com/SeninDmity/passportOffice",
+  "authors": [
+    "dmitry.senin <dmitry.senin@akvelon.com>"
+  ],
+  "description": "First project of test period in Akvelon.",
+  "main": "app.modul.js",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.0",
+    "jquery": "^2.2.0",
+    "bootstrap": "^3.3.6",
+    "ngInfiniteScroll": "^1.2.2",
+    "spin.js": "^2.3.2",
+    "angular-spinner": "^0.8.1",
+    "angular-bootstrap": "^1.1.2"
+  }
+}

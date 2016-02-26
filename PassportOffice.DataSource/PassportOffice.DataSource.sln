@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassportOffice.DataSource", "PassportOffice.DataSource\PassportOffice.DataSource.csproj", "{788D3E9A-B979-4F1C-9192-8692AA192A25}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassportOffice.API", "PassportOffice.API\PassportOffice.API.csproj", "{4B1BFC39-1302-4E07-9F50-CB162179223F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalInfo.Test", "PersonalInfo.Test\PersonalInfo.Test.csproj", "{2D488073-FB7A-497F-BD11-7A5C2E75F4C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{788D3E9A-B979-4F1C-9192-8692AA192A25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{788D3E9A-B979-4F1C-9192-8692AA192A25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{788D3E9A-B979-4F1C-9192-8692AA192A25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B1BFC39-1302-4E07-9F50-CB162179223F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B1BFC39-1302-4E07-9F50-CB162179223F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B1BFC39-1302-4E07-9F50-CB162179223F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B1BFC39-1302-4E07-9F50-CB162179223F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D488073-FB7A-497F-BD11-7A5C2E75F4C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D488073-FB7A-497F-BD11-7A5C2E75F4C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D488073-FB7A-497F-BD11-7A5C2E75F4C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D488073-FB7A-497F-BD11-7A5C2E75F4C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

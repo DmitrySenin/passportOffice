@@ -1,0 +1,202 @@
+/*Main styles for all content.*/
+body {
+	font-family: Arial, Tahoma, sans-serif;
+	background: #fafafa;
+	color: #444;
+	font: 100%/30px;
+	text-shadow: 0 1px 0 #fff;
+}
+
+.content-mid {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.content-width {
+	width: 1000px;
+}
+
+/*Site's header*/
+
+header#site-header {
+	padding: 10px;
+	border-bottom: 3px solid #777;
+	box-shadow: 1px 1px #ddd;
+	background: #F4F4F4;
+	margin: 5px 10px 10px;
+	border-radius: 10px;
+	position: relative;
+	height: 50px;
+}
+
+#site-header #header-lbl {
+	font-size: 30px;
+	line-height: 30px;
+}
+
+/*Searching panel*/
+
+#search-panel {
+	display: block;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding: 10px;
+	border: 1px solid #777;
+	border-radius: 5px;
+	position: relative;
+}
+
+#search-panel #panel-label {
+	position: absolute;
+	top: -12px;
+	left: 10px;
+	background: #fafafa;
+}
+
+.search-option {
+	display: inline-block;
+}
+
+.search-option label {
+	display: block;
+}
+
+.search-option input[type="text"] {
+	width: 130px;
+}
+
+
+/*Admin panel*/
+
+#adminPanel {
+	margin-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background: #777;
+	height: 30px;
+}
+
+#adminPanel a {
+	text-decoration: none;
+	display: inline-block;
+	font-size: 25px;
+	line-height: 30px;
+	color: #fff;
+	height: 100%;
+	width: 100px;
+	text-align: center;
+	border-right: 1px solid #777;
+	border-left: 1px solid #777;
+	box-shadow: 1px 1px 5px #fff;
+}
+
+#adminPanel a:hover {
+	box-shadow: 1px 1px 10px #fff;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+/*Personal data container*/
+
+/*Common styles of personal data container.*/
+#personalInfoContainer {
+	background: #f5f5f5;
+	border-collapse: separate;
+	box-shadow: inset 0 1px 0 #fff;
+	font-size: 12px;
+	line-height: 24px;
+	text-align: left;
+}
+
+/*Personal data container's header*/
+#personalInfoContainer th {
+	text-align: center;
+	background: linear-gradient(#777, #444);
+	border-left: 1px solid #555;
+	border-right: 1px solid #777;
+	border-top: 1px solid #555;
+	border-bottom: 1px solid #333;
+	box-shadow: inset 0 1px 0 #999;
+	color: #fff;
+  	font-weight: bold;
+	padding: 10px 15px;
+	position: relative;
+	text-shadow: 0 1px 0 #000
+}
+
+/*Linear gradient for top side of header.*/
+#personalInfoContainer th:after {
+	background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.08));
+	content: '';
+	display: block;
+	height: 25%;
+	left: 0;
+	margin: 1px 0 0 0;
+	position: absolute;
+	top: 25%;
+	width: 100%;
+}
+
+th:first-child {
+	border-left: 1px solid #777;	
+	box-shadow: inset 1px 1px 0 #999;
+}
+
+th:last-child {
+	box-shadow: inset -1px 1px 0 #999;
+}
+
+/*Common data's style.*/
+#personalInfoContainer td {
+	border-right: 1px solid #fff;
+	border-left: 1px solid #e8e8e8;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #e8e8e8;
+	padding: 10px 15px;
+	position: relative;
+	transition: all 300ms;
+}
+
+#personalInfoContainer td:first-child {
+	box-shadow: inset 1px 0 0 #fff;
+}	
+
+#personalInfoContainer td:last-child {
+	border-right: 1px solid #e8e8e8;
+	box-shadow: inset -1px 0 0 #fff;
+}	
+
+#personalInfoContainer tr:nth-child(odd) td {
+	background: #f1f1f1;	
+}
+
+#personalInfoContainer tr:last-of-type td {
+	box-shadow: inset 0 -1px 0 #fff; 
+}
+
+#personalInfoContainer tr:last-of-type td:first-child {
+	box-shadow: inset 1px -1px 0 #fff;
+}	
+
+#personalInfoContainer tr:last-of-type td:last-child {
+	box-shadow: inset -1px -1px 0 #fff;
+}	
+
+/*BLur elements which not under cursor.*/
+#personalInfoContainer tbody:hover td {
+	color: transparent;
+	text-shadow: 0 0 3px #aaa;
+}
+
+/*Distingush data under mouse's cursor.*/
+#personalInfoContainer tbody:hover tr:hover td {
+	color: #444;
+	text-shadow: 0 1px 0 #fff;
+}
+
+span[us-spinner] {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 5;
+}
