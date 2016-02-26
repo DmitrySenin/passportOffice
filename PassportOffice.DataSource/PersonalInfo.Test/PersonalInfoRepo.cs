@@ -103,7 +103,7 @@
             var repo = new PersonalInfoRepository(passportOfficeContext);
             
             var searchingOptions = this.createSearchOptions(this.personInfo);
-            var persons = repo.SearchAll(searchingOptions);
+            var persons = repo.SearchAll(searchingOptions, true);
 
             var searchAndOrderPersonalData = this.sortPersonalInfo(this.personInfo);
             searchAndOrderPersonalData = this.searchPersonalData(searchAndOrderPersonalData, searchingOptions).ToList();
@@ -124,7 +124,7 @@
             var repo = new PersonalInfoRepository(passportOfficeContext);
 
             var searchingOptions = this.createSearchOptions(this.personInfo);
-            var persons = repo.GetPage(pageSize, pageNumber, searchingOptions);
+            var persons = repo.GetPage(pageSize, pageNumber, searchingOptions, true);
 
             var testPersonalData = this.sortPersonalInfo(this.personInfo);
             testPersonalData = this.searchPersonalData(testPersonalData, searchingOptions).ToList();
