@@ -71,7 +71,7 @@
         public void Should_OrderData()
         {
             var repo = new PersonalInfoRepository(passportOfficeContext);
-            var persons = repo.GetAll();
+            var persons = repo.GetAll(true);
 
             var orderedPersonInfo = this.sortPersonalInfo(this.personInfo);
 
